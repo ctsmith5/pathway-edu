@@ -1,0 +1,65 @@
+:root {
+  /* Modern Dark Theme Palette */
+  --bg-primary: #0f172a;       /* Very dark blue/slate */
+  --bg-secondary: #1e293b;     /* Slightly lighter blue/slate for cards */
+  --text-primary: #f1f5f9;     /* Off-white for main text */
+  --text-secondary: #94a3b8;   /* Muted gray-blue for subtitles */
+  --accent-primary: #3b82f6;   /* Bright Blue for buttons/links */
+  --accent-hover: #2563eb;     /* Darker blue for hover states */
+  --accent-secondary: #10b981; /* Emerald green for success/highlights */
+  
+  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+a {
+  font-weight: 500;
+  color: var(--accent-primary);
+  text-decoration: inherit;
+  transition: color 0.2s;
+}
+
+a:hover {
+  color: var(--accent-hover);
+}
+
+h1, h2, h3, h4, h5 {
+  color: var(--text-primary);
+  margin-top: 0;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.25s;
+}
+
+button:hover {
+  background-color: var(--accent-primary);
+}
