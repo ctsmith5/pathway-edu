@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import './Navbar.css';
 
 const CompassIcon = () => (
@@ -84,6 +85,14 @@ const CompassIcon = () => (
 );
 
 const Navbar = ({ onLoginClick }) => {
+  const { isAuthenticated, user, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate('/');
+  };
+
   return (
     <nav className="navbar">
       <div className="navbar-container">
@@ -92,12 +101,30 @@ const Navbar = ({ onLoginClick }) => {
           Pathway
         </Link>
         <ul className="nav-menu">
-          <li className="nav-item">
-            {/* Changed from Link to button-like behavior for Modal */}
-            <span className="nav-links" onClick={onLoginClick} role="button" tabIndex={0}>
-              Login
-            </span>
-          </li>
+          {isAuthenticated ? (
+            <>
+              <li className="nav-item">
+                <Link to="/dashboard" className="nav-links">
+                  Dashboard
+                </Link>
+              </li>
+              <li className="nav-item nav-user">
+                <span className="nav-user-name">{user?.name}</span>
+                <button 
+                  className="nav-logout-btn"
+                  onClick={handleLogout}
+                >
+                  Logout
+                </button>
+              </li>
+            </>
+          ) : (
+            <li className="nav-item">
+              <span className="nav-links" onClick={onLoginClick} role="button" tabIndex={0}>
+                Login
+              </span>
+            </li>
+          )}
         </ul>
       </div>
     </nav>

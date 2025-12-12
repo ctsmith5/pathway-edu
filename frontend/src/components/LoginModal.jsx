@@ -1,16 +1,66 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import './LoginModal.css';
 
 const LoginModal = ({ isOpen, onClose }) => {
+  const [isLogin, setIsLogin] = useState(true);
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  
+  const { login, register } = useAuth();
+  const navigate = useNavigate();
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e) => {
+  const resetForm = () => {
+    setName('');
+    setEmail('');
+    setPassword('');
+    setConfirmPassword('');
+    setError('');
+  };
+
+  const handleToggleMode = () => {
+    setIsLogin(!isLogin);
+    resetForm();
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Login attempt:', { email, password });
-    // TODO: Connect to backend auth
+    setError('');
+    setLoading(true);
+
+    try {
+      if (isLogin) {
+        await login(email, password);
+      } else {
+        // Validation for registration
+        if (password !== confirmPassword) {
+          setError('Passwords do not match');
+          setLoading(false);
+          return;
+        }
+        if (password.length < 6) {
+          setError('Password must be at least 6 characters');
+          setLoading(false);
+          return;
+        }
+        await register(name, email, password);
+      }
+      
+      // Success - close modal and redirect to dashboard
+      onClose();
+      navigate('/dashboard');
+    } catch (err) {
+      setError(err.message || 'An error occurred');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -19,11 +69,31 @@ const LoginModal = ({ isOpen, onClose }) => {
         <button className="modal-close" onClick={onClose}>&times;</button>
         
         <div className="modal-header">
-          <h2>Welcome Back</h2>
-          <p>Login to continue your child's journey</p>
+          <h2>{isLogin ? 'Welcome Back' : 'Create Account'}</h2>
+          <p>{isLogin ? 'Login to continue your learning journey' : 'Join Pathway and start learning'}</p>
         </div>
 
+        {error && (
+          <div className="error-message">
+            {error}
+          </div>
+        )}
+
         <form onSubmit={handleSubmit} className="login-form">
+          {!isLogin && (
+            <div className="form-group">
+              <label htmlFor="name">Full Name</label>
+              <input
+                type="text"
+                id="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="John Doe"
+                required
+              />
+            </div>
+          )}
+
           <div className="form-group">
             <label htmlFor="email">Email Address</label>
             <input
@@ -31,7 +101,7 @@ const LoginModal = ({ isOpen, onClose }) => {
               id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="parent@example.com"
+              placeholder="you@example.com"
               required
             />
           </div>
@@ -45,16 +115,41 @@ const LoginModal = ({ isOpen, onClose }) => {
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••"
               required
+              minLength={6}
             />
           </div>
 
-          <button type="submit" className="login-button">
-            Log In
+          {!isLogin && (
+            <div className="form-group">
+              <label htmlFor="confirmPassword">Confirm Password</label>
+              <input
+                type="password"
+                id="confirmPassword"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                placeholder="••••••••"
+                required
+                minLength={6}
+              />
+            </div>
+          )}
+
+          <button type="submit" className="login-button" disabled={loading}>
+            {loading ? 'Please wait...' : (isLogin ? 'Log In' : 'Create Account')}
           </button>
         </form>
 
         <div className="modal-footer">
-          <p>Don't have an account? <a href="#">Contact Admissions</a></p>
+          <p>
+            {isLogin ? "Don't have an account? " : "Already have an account? "}
+            <button 
+              type="button" 
+              className="toggle-mode-btn"
+              onClick={handleToggleMode}
+            >
+              {isLogin ? 'Sign Up' : 'Log In'}
+            </button>
+          </p>
         </div>
       </div>
     </div>
@@ -62,4 +157,3 @@ const LoginModal = ({ isOpen, onClose }) => {
 };
 
 export default LoginModal;
-

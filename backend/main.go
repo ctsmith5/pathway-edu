@@ -7,6 +7,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 	"github.com/pathway/backend/handlers"
+	"github.com/pathway/backend/middleware"
 	"github.com/pathway/backend/repository"
 )
 
@@ -44,7 +45,7 @@ func main() {
 		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
 		c.Writer.Header().Set("Access-Control-Allow-Credentials", "true")
 		c.Writer.Header().Set("Access-Control-Allow-Headers", "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With")
-		c.Writer.Header().Set("Access-Control-Allow-Methods", "POST, OPTIONS, GET, PUT")
+		c.Writer.Header().Set("Access-Control-Allow-Methods", "POST, OPTIONS, GET, PUT, DELETE")
 
 		if c.Request.Method == "OPTIONS" {
 			c.AbortWithStatus(204)
@@ -57,8 +58,25 @@ func main() {
 	// Routes
 	api := r.Group("/api")
 	{
+		// Public routes
 		api.GET("/health", h.HealthCheck)
 		api.GET("/courses", h.GetCourses)
+		api.GET("/courses/:id", h.GetCourseByID)
+
+		// Auth routes (public)
+		auth := api.Group("/auth")
+		{
+			auth.POST("/register", h.Register)
+			auth.POST("/login", h.Login)
+		}
+
+		// Protected routes (require authentication)
+		user := api.Group("/user")
+		user.Use(middleware.AuthMiddleware())
+		{
+			user.GET("/me", h.GetCurrentUser)
+			user.GET("/progress", h.GetUserProgress)
+		}
 	}
 
 	// Start Server

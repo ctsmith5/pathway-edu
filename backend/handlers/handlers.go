@@ -23,10 +23,62 @@ func (h *Handler) HealthCheck(c *gin.Context) {
 }
 
 func (h *Handler) GetCourses(c *gin.Context) {
-	// Mock data for now
-	courses := []gin.H{
-		{"id": "1", "title": "Intro to Programming", "description": "Basics of Go and Logic"},
-		{"id": "2", "title": "Web Development", "description": "HTML, CSS, and React"},
+	courses, err := h.Repo.GetAllCourses()
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error": "Failed to fetch courses",
+		})
+		return
 	}
+
 	c.JSON(http.StatusOK, courses)
+}
+
+// GetCourseByID retrieves a single course by its ID
+func (h *Handler) GetCourseByID(c *gin.Context) {
+	courseID := c.Param("id")
+	if courseID == "" {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Course ID required"})
+		return
+	}
+
+	course, err := h.Repo.GetCourseByID(courseID)
+	if err != nil {
+		c.JSON(http.StatusNotFound, gin.H{"error": "Course not found"})
+		return
+	}
+
+	c.JSON(http.StatusOK, course)
+}
+
+// GetUserProgress retrieves the authenticated user's progress across all courses
+func (h *Handler) GetUserProgress(c *gin.Context) {
+	userID := c.GetString("userID")
+	if userID == "" {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "User not authenticated"})
+		return
+	}
+
+	// Get courses with progress
+	coursesWithProgress, err := h.Repo.GetUserProgressWithCourses(userID)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to fetch progress"})
+		return
+	}
+
+	// If no progress exists, initialize it
+	if len(coursesWithProgress) == 0 {
+		if err := h.Repo.InitializeUserProgress(userID); err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to initialize progress"})
+			return
+		}
+		// Fetch again after initialization
+		coursesWithProgress, err = h.Repo.GetUserProgressWithCourses(userID)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to fetch progress"})
+			return
+		}
+	}
+
+	c.JSON(http.StatusOK, coursesWithProgress)
 }
