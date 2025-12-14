@@ -1,0 +1,9 @@
+[phases.setup]
+nixPkgs = ["golang"]
+
+[phases.build]
+cmds = ["go mod download", "go build -o server ."]
+
+[start]
+cmd = "./server"
+
