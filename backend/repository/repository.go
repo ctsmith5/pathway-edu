@@ -64,6 +64,11 @@ func (r *MongoRepository) Close() {
 	}
 }
 
+// GetDB returns the underlying MongoDB database (for migration scripts)
+func (r *MongoRepository) GetDB() *mongo.Database {
+	return r.db
+}
+
 // ==================== Course Methods ====================
 
 // GetAllCourses retrieves all courses from the database
