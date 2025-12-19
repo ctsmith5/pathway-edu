@@ -112,6 +112,55 @@ Git is a *distributed* version control system, which means you have the complete
 							"Distributed systems allow developers to work offline, have faster operations since most are local, provide better redundancy (every clone is a backup), and enable more flexible workflows like forking.",
 							[]string{"Think about what happens if the central server goes down", "Consider developers in different time zones"},
 						),
+						textBlock(`## Setting Up Your GitHub Account
+
+Before we start using Git, let's set up GitHub - the most popular platform for hosting Git repositories and collaborating with others.
+
+### Step 1: Create Your GitHub Account
+
+1. Go to [github.com](https://github.com)
+2. Click **Sign up** in the top right corner
+3. Enter your email address
+4. Create a strong password
+5. Choose a username (this will be visible to others, so pick something professional!)
+6. Complete the verification and click **Create account**
+7. Verify your email address by clicking the link GitHub sends you
+
+### Step 2: Configure Git on Your Computer
+
+After installing Git, you need to tell it who you are. Open your terminal (Command Prompt, PowerShell, or Terminal) and run these commands:`),
+						codeBlock("bash", `# Set your name (use your real name)
+git config --global user.name "Your Name"
+
+# Set your email (use the same email as your GitHub account)
+git config --global user.email "your.email@example.com"
+
+# Verify your settings
+git config --list`),
+						calloutBlock("tip", "The --global flag means these settings apply to all your Git projects. You only need to do this once per computer!"),
+						textBlock(`### Step 3: Set Up Authentication
+
+To push code to GitHub, you need to authenticate. The recommended method is using a Personal Access Token (PAT):
+
+1. Go to GitHub → Click your profile picture → **Settings**
+2. Scroll down to **Developer settings** (bottom of left sidebar)
+3. Click **Personal access tokens** → **Tokens (classic)**
+4. Click **Generate new token** → **Generate new token (classic)**
+5. Give it a name like "My Laptop"
+6. Set expiration (90 days is a good start)
+7. Check the **repo** scope (this allows full access to repositories)
+8. Click **Generate token**
+9. **Copy the token immediately** - you won't be able to see it again!`),
+						calloutBlock("warning", "Treat your Personal Access Token like a password. Never share it or commit it to a repository!"),
+						textBlock(`When Git asks for your password (during push/pull), use this token instead of your GitHub password.
+
+You're now ready to start using Git and GitHub together!`),
+						exerciseBlock(
+							"Configure Git with your name and email. What commands did you use?",
+							`git config --global user.name "Your Name"
+git config --global user.email "your.email@example.com"`,
+							[]string{"Use git config with the --global flag", "You need to set both user.name and user.email"},
+						),
 					},
 				},
 				{
@@ -162,10 +211,150 @@ git add hello.txt
 git commit -m "Initial commit"`,
 							[]string{"Use git init to start", "Create the file, then add it", "Don't forget the -m flag for your message"},
 						),
+						textBlock(`## Hands-On: Create Your Hello World Project
+
+Now it's time to create your first real Git project! Follow along step by step.
+
+### Step 1: Create Your Project Folder
+
+Open your terminal and create a new folder for your project:`),
+						codeBlock("bash", `# Create a new folder
+mkdir my-first-repo
+
+# Navigate into the folder
+cd my-first-repo`),
+						textBlock(`### Step 2: Initialize Git
+
+Turn this folder into a Git repository:`),
+						codeBlock("bash", `git init`),
+						textBlock(`You should see: "Initialized empty Git repository in .../my-first-repo/.git/"
+
+### Step 3: Create Your HelloWorld.txt File
+
+Create a text file with your name and a greeting. You can use any text editor, or use the command line:`),
+						codeBlock("bash", `# On Windows (PowerShell)
+echo "Your Name" > HelloWorld.txt
+echo "Hello World!" >> HelloWorld.txt
+
+# On Mac/Linux
+echo "Your Name" > HelloWorld.txt
+echo "Hello World!" >> HelloWorld.txt`),
+						calloutBlock("tip", "Replace 'Your Name' with your actual name! This file will be part of your portfolio."),
+						textBlock(`Your HelloWorld.txt should look something like this:`),
+						codeBlock("text", `Colin
+Hello World!`),
+						textBlock(`### Step 4: Check the Status
+
+See what Git knows about your new file:`),
+						codeBlock("bash", `git status`),
+						textBlock(`You'll see HelloWorld.txt listed as an "untracked file" - Git sees it but isn't tracking changes yet.
+
+### Step 5: Stage Your File`),
+						codeBlock("bash", `git add HelloWorld.txt`),
+						textBlock(`### Step 6: Commit Your File
+
+Create your first commit with a meaningful message:`),
+						codeBlock("bash", `git commit -m "Add HelloWorld.txt with my name and greeting"`),
+						calloutBlock("info", "Congratulations! You've just created your first Git commit. This snapshot is now saved in your repository's history forever."),
+						textBlock(`### Step 7: View Your Commit History`),
+						codeBlock("bash", `git log`),
+						textBlock(`You'll see your commit with the message, author (you!), and a unique commit hash.
+
+**Keep this repository open** - we'll push it to GitHub in the next module!`),
+						exerciseBlock(
+							"You've created HelloWorld.txt and committed it. What command shows you the history of commits in your repository?",
+							"git log - This shows all commits in reverse chronological order, including commit hash, author, date, and message.",
+							[]string{"Think about what command shows history", "It's a short three-letter command"},
+						),
 					},
 				},
 				{
 					ID:    "git-3",
+					Title: "Remote Repositories",
+					Content: []models.ContentBlock{
+						textBlock(`## Working with Remote Repositories
+
+Remote repositories are versions of your project hosted on the internet or network. They enable collaboration with others.
+
+### Popular Git Hosting Services
+
+- **GitHub**: Most popular, great for open source
+- **GitLab**: Strong CI/CD features, can self-host
+- **Bitbucket**: Integrates well with Atlassian tools`),
+						textBlock(`## Connecting to a Remote`),
+						codeBlock("bash", `# Add a remote repository
+git remote add origin https://github.com/username/repo.git
+
+# View your remotes
+git remote -v`),
+						calloutBlock("info", "'origin' is the conventional name for your primary remote repository. You can have multiple remotes with different names."),
+						textBlock(`## Pushing Changes
+
+Send your local commits to the remote repository:`),
+						codeBlock("bash", `# Push to remote (first time, sets upstream)
+git push -u origin main
+
+# Subsequent pushes
+git push`),
+						textBlock(`## Pulling Changes
+
+Get changes from the remote repository:`),
+						codeBlock("bash", `# Fetch and merge changes
+git pull
+
+# Just fetch (doesn't merge)
+git fetch`),
+						textBlock(`## Cloning a Repository
+
+To get a copy of an existing remote repository:`),
+						codeBlock("bash", `git clone https://github.com/username/repo.git`),
+						exerciseBlock(
+							"What's the difference between git fetch and git pull?",
+							"git fetch downloads changes from the remote but doesn't integrate them into your working branch. git pull does both - it fetches AND merges the changes. Using fetch is safer when you want to review changes before merging.",
+							[]string{"Think about what happens to your local files", "Consider when you might want to see changes before applying them"},
+						),
+						textBlock(`## Hands-On: Push Your Hello World to GitHub
+
+Now let's push the repository you created in the previous module to GitHub!
+
+### Step 1: Create a Repository on GitHub
+
+1. Go to [github.com](https://github.com) and sign in
+2. Click the **+** icon in the top right corner
+3. Select **New repository**
+4. Name it **my-first-repo** (same as your local folder)
+5. Leave it as **Public** (so your instructor can see it)
+6. **Do NOT** initialize with a README, .gitignore, or license (your local repo already has content)
+7. Click **Create repository**`),
+						calloutBlock("warning", "Make sure you DON'T check any of the initialization options! We already have a local repository with commits."),
+						textBlock(`### Step 2: Connect Your Local Repository to GitHub
+
+GitHub will show you commands - use the "push an existing repository" option. In your terminal (make sure you're in the my-first-repo folder):`),
+						codeBlock("bash", `# Add GitHub as your remote (replace YOUR-USERNAME with your GitHub username)
+git remote add origin https://github.com/YOUR-USERNAME/my-first-repo.git
+
+# Verify the remote was added
+git remote -v`),
+						textBlock(`### Step 3: Push Your Code to GitHub`),
+						codeBlock("bash", `# Push your main branch to GitHub
+git push -u origin main`),
+						calloutBlock("tip", "The -u flag sets up tracking, so future pushes only need 'git push'. If asked for credentials, use your GitHub username and your Personal Access Token (not your password!)."),
+						textBlock(`### Step 4: Verify on GitHub
+
+1. Go to your repository on GitHub: https://github.com/YOUR-USERNAME/my-first-repo
+2. You should see your HelloWorld.txt file!
+3. Click on it to see the contents - your name and "Hello World!"
+
+**Congratulations!** Your code is now on GitHub for the world to see!`),
+						exerciseBlock(
+							"You've pushed your first repository! What command did you use to connect your local repo to GitHub?",
+							"git remote add origin https://github.com/YOUR-USERNAME/my-first-repo.git - This adds a remote called 'origin' pointing to your GitHub repository.",
+							[]string{"Think about adding a remote", "The remote is conventionally called 'origin'"},
+						),
+					},
+				},
+				{
+					ID:    "git-4",
 					Title: "Branching and Merging",
 					Content: []models.ContentBlock{
 						textBlock(`## What are Branches?
@@ -216,52 +405,61 @@ git merge feature-login`),
 git checkout main`,
 							[]string{"Use -b flag to create and switch in one command", "Use checkout or switch to change branches"},
 						),
-					},
-				},
-				{
-					ID:    "git-4",
-					Title: "Remote Repositories",
-					Content: []models.ContentBlock{
-						textBlock(`## Working with Remote Repositories
+						textBlock(`## Hands-On: Create Your Development Branch
 
-Remote repositories are versions of your project hosted on the internet or network. They enable collaboration with others.
+Now let's practice branching with your Hello World project! You'll create a development branch and add more about yourself.
 
-### Popular Git Hosting Services
+### Step 1: Make Sure You're on Main
 
-- **GitHub**: Most popular, great for open source
-- **GitLab**: Strong CI/CD features, can self-host
-- **Bitbucket**: Integrates well with Atlassian tools`),
-						textBlock(`## Connecting to a Remote`),
-						codeBlock("bash", `# Add a remote repository
-git remote add origin https://github.com/username/repo.git
+First, ensure you're on the main branch and have the latest code:`),
+						codeBlock("bash", `# Navigate to your project (if not already there)
+cd my-first-repo
 
-# View your remotes
-git remote -v`),
-						calloutBlock("info", "'origin' is the conventional name for your primary remote repository. You can have multiple remotes with different names."),
-						textBlock(`## Pushing Changes
+# Check which branch you're on
+git branch
 
-Send your local commits to the remote repository:`),
-						codeBlock("bash", `# Push to remote (first time, sets upstream)
-git push -u origin main
+# Make sure you're on main
+git checkout main`),
+						textBlock(`### Step 2: Create and Switch to Development Branch`),
+						codeBlock("bash", `# Create and switch to a new branch called 'development'
+git checkout -b development`),
+						textBlock(`You should see: "Switched to a new branch 'development'"
 
-# Subsequent pushes
-git push`),
-						textBlock(`## Pulling Changes
+### Step 3: Update Your HelloWorld.txt
 
-Get changes from the remote repository:`),
-						codeBlock("bash", `# Fetch and merge changes
-git pull
+Open HelloWorld.txt in a text editor and add a short bio about yourself. Your file should now look something like this:`),
+						codeBlock("text", `Colin
+Hello World!
 
-# Just fetch (doesn't merge)
-git fetch`),
-						textBlock(`## Cloning a Repository
+About Me:
+- I'm learning Git and version control
+- My favorite programming language is: [your answer]
+- One thing I want to build: [your answer]
+- Fun fact about me: [your answer]`),
+						calloutBlock("tip", "Make this personal! Add your actual interests and goals. This is practice for real development where you'll document your work."),
+						textBlock(`### Step 4: Stage and Commit Your Changes`),
+						codeBlock("bash", `# Check what changed
+git status
 
-To get a copy of an existing remote repository:`),
-						codeBlock("bash", `git clone https://github.com/username/repo.git`),
+# Stage your changes
+git add HelloWorld.txt
+
+# Commit with a descriptive message
+git commit -m "Add personal bio to HelloWorld.txt"`),
+						textBlock(`### Step 5: Push Your Development Branch to GitHub`),
+						codeBlock("bash", `# Push the development branch (first time)
+git push -u origin development`),
+						textBlock(`### Step 6: Verify on GitHub
+
+1. Go to your repository on GitHub
+2. Click the branch dropdown (it says "main")
+3. You should see "development" as an option
+4. Switch to it and verify your bio is there!`),
+						calloutBlock("info", "You now have two branches: 'main' with your original Hello World, and 'development' with your added bio. This is exactly how professional developers work!"),
 						exerciseBlock(
-							"What's the difference between git fetch and git pull?",
-							"git fetch downloads changes from the remote but doesn't integrate them into your working branch. git pull does both - it fetches AND merges the changes. Using fetch is safer when you want to review changes before merging.",
-							[]string{"Think about what happens to your local files", "Consider when you might want to see changes before applying them"},
+							"You created a development branch and pushed it to GitHub. What command creates a new branch AND switches to it in one step?",
+							"git checkout -b development - The -b flag tells git to create the branch and then switch to it immediately.",
+							[]string{"Think about the checkout command", "There's a flag that combines create and switch"},
 						),
 					},
 				},
@@ -325,6 +523,106 @@ Used in open source projects:
 							"You want to contribute to an open source project. What are the steps?",
 							"1. Fork the repository on GitHub\n2. Clone your fork: git clone https://github.com/YOUR-USERNAME/repo.git\n3. Create a feature branch: git checkout -b my-feature\n4. Make changes and commit them\n5. Push to your fork: git push origin my-feature\n6. Open a Pull Request from your fork to the original repository",
 							[]string{"Start by getting your own copy of the repo", "You can't push directly to someone else's repo"},
+						),
+						textBlock(`## Hands-On: Your First Pull Request
+
+Now it's time to complete your first real collaboration workflow! You'll create a Pull Request to merge your development branch into main and request a code review.
+
+### Step 1: Go to Your Repository on GitHub
+
+1. Navigate to https://github.com/YOUR-USERNAME/my-first-repo
+2. You should see a banner saying "development had recent pushes" with a **Compare & pull request** button
+3. If you don't see the banner, click the **Pull requests** tab, then **New pull request**`),
+						calloutBlock("tip", "GitHub often shows a helpful banner when you've recently pushed a branch. This is the fastest way to create a PR!"),
+						textBlock(`### Step 2: Create the Pull Request
+
+1. Make sure the base branch is **main** and the compare branch is **development**
+2. You'll see the changes you made (your bio additions)
+
+Fill in the PR form:
+
+**Title:** Add personal bio to HelloWorld.txt
+
+**Description:**`),
+						codeBlock("markdown", `## Summary
+- Added a personal bio section to HelloWorld.txt
+- Includes my background, interests, and goals
+
+## Changes Made
+- Updated HelloWorld.txt with "About Me" section
+- Added favorite programming language
+- Added project goals
+- Added a fun fact
+
+## Testing
+- Verified the file displays correctly on GitHub
+- Confirmed all information is accurate`),
+						calloutBlock("info", "Writing good PR descriptions is a professional skill. Get in the habit now - your future teammates will thank you!"),
+						textBlock(`### Step 3: Request a Code Review
+
+On the right side of the PR page:
+
+1. Find the **Reviewers** section
+2. Click the gear icon
+3. Search for your instructor's GitHub username
+4. Select them to request a review`),
+						calloutBlock("warning", "Ask your instructor for their GitHub username so you can request them as a reviewer. They'll review your work and provide feedback!"),
+						textBlock(`### Step 4: Submit the Pull Request
+
+1. Review everything looks correct
+2. Click the green **Create pull request** button
+
+**Congratulations!** You've just created your first Pull Request!
+
+### What Happens Next?
+
+1. **Reviewer gets notified**: Your instructor will receive an email/notification
+2. **Review process**: They may:
+   - Approve the PR (you can then merge it)
+   - Request changes (you'll need to update your branch)
+   - Leave comments (you can discuss and respond)
+3. **Merge**: Once approved, you (or the reviewer) can merge the changes into main
+
+### Step 5: After Approval - Merge Your PR
+
+Once your instructor approves:
+
+1. Click the green **Merge pull request** button
+2. Click **Confirm merge**
+3. Optionally, delete the development branch (GitHub will offer this)
+
+Your bio is now part of the main branch!`),
+						textBlock(`### Step 6: Update Your Local Repository
+
+After merging on GitHub, update your local main branch:`),
+						codeBlock("bash", `# Switch to main
+git checkout main
+
+# Pull the merged changes
+git pull origin main
+
+# Verify your bio is now in main
+cat HelloWorld.txt`),
+						calloutBlock("tip", "Always pull after merging on GitHub to keep your local repository in sync!"),
+						textBlock(`## Summary: What You've Learned
+
+In this hands-on project, you've completed a full Git workflow:
+
+1. **Set up GitHub** - Created an account and configured Git
+2. **Created a repository** - Both locally and on GitHub
+3. **Made your first commit** - HelloWorld.txt with your name
+4. **Pushed to GitHub** - Shared your code with the world
+5. **Created a branch** - Separated development from main
+6. **Made changes on a branch** - Added your bio
+7. **Created a Pull Request** - Proposed merging your changes
+8. **Requested a code review** - Got feedback from your instructor
+9. **Merged your changes** - Completed the workflow
+
+This is exactly how professional developers work every day!`),
+						exerciseBlock(
+							"You've completed your first Pull Request! What are the three possible outcomes when a reviewer looks at your PR?",
+							"1. Approve - The reviewer is happy with your changes and you can merge\n2. Request changes - The reviewer wants you to modify something before merging\n3. Comment - The reviewer has questions or suggestions but hasn't made a decision yet\n\nAll three are normal parts of the code review process!",
+							[]string{"Think about what a reviewer might do after looking at your code", "There are three main actions a reviewer can take"},
 						),
 					},
 				},
