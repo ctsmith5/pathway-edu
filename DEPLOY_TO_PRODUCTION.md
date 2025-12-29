@@ -59,3 +59,6 @@ railway run go run cmd/seed/main.go
 **Database (MongoDB Atlas):**
 - Needs to be seeded with: `go run cmd/seed/main.go`
 
+
+
+

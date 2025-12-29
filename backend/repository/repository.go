@@ -27,6 +27,7 @@ type Repository interface {
 	GetUserProgress(userID string) ([]models.Progress, error)
 	InitializeUserProgress(userID string) error
 	GetUserProgressWithCourses(userID string) ([]models.CourseWithProgress, error)
+	MarkModuleComplete(userID string, courseID string, moduleID string) error
 }
 
 type MongoRepository struct {
@@ -300,4 +301,78 @@ func (r *MongoRepository) GetUserProgressWithCourses(userID string) ([]models.Co
 	}
 
 	return result, nil
+}
+
+// MarkModuleComplete marks a specific module as complete for a user
+func (r *MongoRepository) MarkModuleComplete(userID string, courseID string, moduleID string) error {
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+
+	userObjectID, err := primitive.ObjectIDFromHex(userID)
+	if err != nil {
+		return err
+	}
+
+	courseObjectID, err := primitive.ObjectIDFromHex(courseID)
+	if err != nil {
+		return err
+	}
+
+	// First, check if the module is already in completed_modules
+	// Use $addToSet to avoid duplicates
+	filter := bson.M{
+		"user_id":   userObjectID,
+		"course_id": courseObjectID,
+	}
+
+	update := bson.M{
+		"$addToSet": bson.M{
+			"completed_modules": moduleID,
+		},
+	}
+
+	result, err := r.db.Collection("progress").UpdateOne(ctx, filter, update)
+	if err != nil {
+		return err
+	}
+
+	// If no document was updated, create one
+	if result.MatchedCount == 0 {
+		progress := models.Progress{
+			UserID:           userObjectID,
+			CourseID:         courseObjectID,
+			CompletedModules: []string{moduleID},
+			IsCompleted:      false,
+		}
+		_, err = r.db.Collection("progress").InsertOne(ctx, progress)
+		if err != nil {
+			return err
+		}
+	}
+
+	// Now check if all modules in the course are complete
+	course, err := r.GetCourseByID(courseID)
+	if err != nil {
+		return nil // Don't fail the whole operation just for this check
+	}
+
+	// Get updated progress
+	var progress models.Progress
+	err = r.db.Collection("progress").FindOne(ctx, filter).Decode(&progress)
+	if err != nil {
+		return nil
+	}
+
+	// Check if all modules are complete
+	if len(progress.CompletedModules) >= len(course.Modules) {
+		// Mark course as completed
+		_, err = r.db.Collection("progress").UpdateOne(ctx, filter, bson.M{
+			"$set": bson.M{"is_completed": true},
+		})
+		if err != nil {
+			return nil
+		}
+	}
+
+	return nil
 }

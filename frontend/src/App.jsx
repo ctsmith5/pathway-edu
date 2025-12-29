@@ -3,7 +3,10 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { AuthProvider } from './context/AuthContext'
 import Navbar from './components/Navbar'
 import LandingPage from './pages/LandingPage'
-import Dashboard from './pages/Dashboard'
+import ChaptersView from './pages/ChaptersView'
+import ChapterDetailView from './pages/ChapterDetailView'
+import CoursesView from './pages/CoursesView'
+import ProfileView from './pages/ProfileView'
 import ModuleView from './pages/ModuleView'
 import LoginModal from './components/LoginModal'
 import ProtectedRoute from './components/ProtectedRoute'
@@ -27,7 +30,31 @@ function App() {
               path="/dashboard" 
               element={
                 <ProtectedRoute>
-                  <Dashboard />
+                  <ChaptersView />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/chapter/:chapterId" 
+              element={
+                <ProtectedRoute>
+                  <ChapterDetailView />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/courses" 
+              element={
+                <ProtectedRoute>
+                  <CoursesView />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/profile" 
+              element={
+                <ProtectedRoute>
+                  <ProfileView />
                 </ProtectedRoute>
               } 
             />

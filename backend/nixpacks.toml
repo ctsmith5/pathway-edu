@@ -7,3 +7,6 @@ cmds = ["go mod download", "go build -o server ."]
 [start]
 cmd = "./server"
 
+
+
+

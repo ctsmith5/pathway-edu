@@ -105,7 +105,17 @@ const Navbar = ({ onLoginClick }) => {
             <>
               <li className="nav-item">
                 <Link to="/dashboard" className="nav-links">
-                  Dashboard
+                  Chapters
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/courses" className="nav-links">
+                  Courses
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/profile" className="nav-links">
+                  Profile
                 </Link>
               </li>
               <li className="nav-item nav-user">

@@ -1,0 +1,112 @@
+.badge {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--card-bg, #ffffff);
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid var(--border-color, #e5e7eb);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+}
+
+.badge:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.badge--earned {
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.05) 0%, transparent 100%);
+  border-color: var(--success-light, #bbf7d0);
+}
+
+.badge--locked {
+  opacity: 0.7;
+}
+
+.badge__icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.badge--locked .badge__icon {
+  background: var(--text-tertiary, #9ca3af) !important;
+}
+
+.badge__initials {
+  font-size: 1.125rem;
+  letter-spacing: 1px;
+}
+
+.badge__lock {
+  font-size: 1.25rem;
+}
+
+.badge__info {
+  flex: 1;
+  min-width: 0;
+}
+
+.badge__title {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: var(--text-primary, #1f2937);
+  margin: 0 0 4px 0;
+}
+
+.badge--locked .badge__title {
+  color: var(--text-secondary, #6b7280);
+}
+
+.badge__description {
+  font-size: 0.875rem;
+  color: var(--text-secondary, #6b7280);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.badge--earned .badge__description {
+  color: var(--success-color, #10b981);
+  font-weight: 500;
+}
+
+.badge__earned-indicator {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 28px;
+  height: 28px;
+  background: var(--success-color, #10b981);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 0.875rem;
+  font-weight: 700;
+  box-shadow: 0 2px 6px rgba(16, 185, 129, 0.4);
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .badge {
+    flex-direction: column;
+    text-align: center;
+    padding: 24px 16px;
+  }
+
+  .badge__earned-indicator {
+    top: -8px;
+    right: 50%;
+    transform: translateX(50%);
+  }
+}
+

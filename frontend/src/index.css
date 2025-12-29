@@ -4,9 +4,28 @@
   --bg-secondary: #1e293b;     /* Slightly lighter blue/slate for cards */
   --text-primary: #f1f5f9;     /* Off-white for main text */
   --text-secondary: #94a3b8;   /* Muted gray-blue for subtitles */
+  --text-tertiary: #64748b;    /* Even more muted for hints */
   --accent-primary: #3b82f6;   /* Bright Blue for buttons/links */
   --accent-hover: #2563eb;     /* Darker blue for hover states */
   --accent-secondary: #10b981; /* Emerald green for success/highlights */
+  
+  /* Extended Color Palette */
+  --card-bg: #1e293b;
+  --border-color: #334155;
+  --progress-bg: #334155;
+  
+  /* Primary Colors (indigo-based) */
+  --primary-color: #6366f1;
+  --primary-dark: #4f46e5;
+  --primary-light: #818cf8;
+  
+  /* Success Colors */
+  --success-color: #10b981;
+  --success-dark: #059669;
+  --success-light: #34d399;
+  
+  /* Error Colors */
+  --error-color: #ef4444;
   
   font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;

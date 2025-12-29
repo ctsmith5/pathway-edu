@@ -1,0 +1,152 @@
+.chapter-card {
+  background: var(--card-bg, #ffffff);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--border-color, #e5e7eb);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.chapter-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+.chapter-card--completed {
+  border-color: var(--success-color, #10b981);
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.05) 0%, transparent 100%);
+}
+
+.chapter-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.chapter-card__title-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.chapter-card__title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary, #1f2937);
+  margin: 0;
+}
+
+.chapter-card__badge {
+  background: var(--success-color, #10b981);
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.chapter-card__time {
+  font-size: 0.875rem;
+  color: var(--text-secondary, #6b7280);
+  white-space: nowrap;
+}
+
+.chapter-card__description {
+  font-size: 0.9375rem;
+  color: var(--text-secondary, #6b7280);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.chapter-card__progress {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.chapter-card__progress .progress-bar {
+  height: 8px;
+  background: var(--progress-bg, #e5e7eb);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.chapter-card__progress .progress-bar__fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary-color, #6366f1), var(--primary-light, #818cf8));
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.chapter-card--completed .progress-bar__fill {
+  background: var(--success-color, #10b981);
+}
+
+.chapter-card__progress .progress-text {
+  font-size: 0.8125rem;
+  color: var(--text-secondary, #6b7280);
+}
+
+.chapter-card__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 0;
+  border-top: 1px solid var(--border-color, #e5e7eb);
+  border-bottom: 1px solid var(--border-color, #e5e7eb);
+}
+
+.chapter-card__next-label {
+  font-size: 0.75rem;
+  color: var(--text-tertiary, #9ca3af);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.chapter-card__next-title {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--text-primary, #1f2937);
+}
+
+.chapter-card__all-done {
+  font-size: 0.9375rem;
+  color: var(--success-color, #10b981);
+  font-weight: 500;
+}
+
+.chapter-card__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  background: var(--primary-color, #6366f1);
+  color: white;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.1s ease;
+  margin-top: auto;
+}
+
+.chapter-card__button:hover {
+  background: var(--primary-dark, #4f46e5);
+  transform: translateY(-1px);
+}
+
+.chapter-card--completed .chapter-card__button {
+  background: var(--success-color, #10b981);
+}
+
+.chapter-card--completed .chapter-card__button:hover {
+  background: var(--success-dark, #059669);
+}
+

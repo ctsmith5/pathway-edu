@@ -1,0 +1,161 @@
+.chapters-view {
+  min-height: calc(100vh - 64px);
+  background: var(--bg-secondary, #f9fafb);
+  padding: 40px 20px;
+}
+
+.chapters-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.chapters-header {
+  margin-bottom: 32px;
+}
+
+.chapters-header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary, #1f2937);
+  margin: 0 0 8px 0;
+}
+
+.chapters-header p {
+  font-size: 1.0625rem;
+  color: var(--text-secondary, #6b7280);
+  margin: 0;
+}
+
+.chapters-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.chapters-stats .stat-card {
+  background: var(--card-bg, #ffffff);
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  border: 1px solid var(--border-color, #e5e7eb);
+}
+
+.chapters-stats .stat-value {
+  display: block;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--primary-color, #6366f1);
+  margin-bottom: 4px;
+}
+
+.chapters-stats .stat-label {
+  font-size: 0.875rem;
+  color: var(--text-secondary, #6b7280);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.chapters-list h2 {
+  font-size: 1.375rem;
+  font-weight: 600;
+  color: var(--text-primary, #1f2937);
+  margin: 0 0 20px 0;
+}
+
+.chapters-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 24px;
+}
+
+/* Loading state */
+.chapters-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  gap: 16px;
+}
+
+.chapters-loading .loading-spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid var(--border-color, #e5e7eb);
+  border-top-color: var(--primary-color, #6366f1);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.chapters-loading p {
+  color: var(--text-secondary, #6b7280);
+  font-size: 1rem;
+}
+
+/* Error state */
+.chapters-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  gap: 16px;
+  text-align: center;
+}
+
+.chapters-error p {
+  color: var(--error-color, #ef4444);
+  font-size: 1rem;
+}
+
+.chapters-error button {
+  padding: 10px 20px;
+  background: var(--primary-color, #6366f1);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.chapters-error button:hover {
+  background: var(--primary-dark, #4f46e5);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .chapters-view {
+    padding: 24px 16px;
+  }
+
+  .chapters-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .chapters-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .chapters-stats {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .chapters-stats .stat-value {
+    font-size: 1.25rem;
+  }
+
+  .chapters-stats .stat-label {
+    font-size: 0.75rem;
+  }
+}
+

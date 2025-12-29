@@ -4502,6 +4502,115 @@ Deploy to Production`),
 			},
 		},
 		{
+			Title:       "Development Tools",
+			Description: "Set up your development environment with the essential tools every developer needs.",
+			Modules: []models.Module{
+				{
+					ID:    "vscode-setup",
+					Title: "VS Code Setup",
+					Content: []models.ContentBlock{
+						textBlock(`## Setting Up Visual Studio Code
+
+Visual Studio Code (VS Code) is a free, powerful code editor that you'll use throughout your development journey. Let's get it set up!
+
+### Why VS Code?
+
+- **Free and Open Source**: Completely free to use
+- **Lightweight but Powerful**: Fast startup, rich features
+- **Extensive Extensions**: Thousands of plugins for any language or tool
+- **Built-in Git**: Version control right in your editor
+- **Integrated Terminal**: Run commands without leaving the editor`),
+						textBlock(`## Step 1: Download VS Code
+
+1. Go to [code.visualstudio.com](https://code.visualstudio.com/)
+2. Click the big **Download** button (it auto-detects your OS)
+3. Run the installer
+
+### Windows Installation Tips
+
+- Check **"Add to PATH"** during installation (important!)
+- Check **"Add 'Open with Code' action"** for right-click menu
+- Check **"Register Code as an editor for supported file types"**`),
+						calloutBlock("tip", "Adding VS Code to PATH lets you open it from the terminal by typing 'code .' in any folder!"),
+						textBlock(`## Step 2: First Launch
+
+When you first open VS Code:
+
+1. **Choose your theme**: Dark or Light (you can change later)
+2. **Skip the welcome tour** for now (or take it if you want!)
+3. You'll see the **Welcome** tab - this is your starting point`),
+						textBlock(`## Step 3: Essential Extensions
+
+Click the **Extensions** icon in the left sidebar (or press Ctrl+Shift+X).
+
+Search for and install these extensions:`),
+						codeBlock("text", `Essential Extensions:
+
+1. ESLint - JavaScript/TypeScript linting
+2. Prettier - Code formatter
+3. GitLens - Enhanced Git features
+4. Auto Rename Tag - HTML/JSX tag renaming
+5. Bracket Pair Colorizer - Colored matching brackets`),
+						calloutBlock("info", "Extensions supercharge VS Code. Start with these essentials, and add more as you discover what you need!"),
+						textBlock(`## Step 4: Configure Settings
+
+Open Settings: Ctrl+, (or Cmd+, on Mac)
+
+### Recommended Settings
+
+Click the **{}** icon in the top right to open settings.json and add:`),
+						codeBlock("json", `{
+  "editor.fontSize": 14,
+  "editor.tabSize": 2,
+  "editor.wordWrap": "on",
+  "editor.formatOnSave": true,
+  "editor.minimap.enabled": false,
+  "files.autoSave": "afterDelay",
+  "terminal.integrated.fontSize": 13
+}`),
+						textBlock(`## Step 5: Learn the Key Shortcuts
+
+These will save you hours:`),
+						codeBlock("text", "Essential Shortcuts:\n\nCtrl+P          - Quick file open\nCtrl+Shift+P    - Command palette (access ANY feature)\nCtrl+B          - Toggle sidebar\nCtrl+`          - Toggle terminal\nCtrl+/          - Comment/uncomment line\nCtrl+D          - Select next occurrence\nCtrl+Shift+K    - Delete line\nAlt+Up/Down     - Move line up/down\nCtrl+Space      - Trigger suggestions"),
+						calloutBlock("tip", "The Command Palette (Ctrl+Shift+P) is your best friend. If you forget how to do something, search for it there!"),
+						textBlock(`## Step 6: Open a Folder
+
+VS Code works best when you open an entire folder (project):
+
+1. Go to **File** > **Open Folder**
+2. Navigate to your my-first-repo folder
+3. Click **Select Folder**
+
+Now you can see all your project files in the sidebar!`),
+						textBlock("## Step 7: Using the Integrated Terminal\n\nOpen the terminal: Ctrl+` (backtick key)\n\nThis terminal is just like your regular command prompt/terminal, but built right into VS Code!\n\nTry these commands:"),
+						codeBlock("bash", `# Check where you are
+pwd
+
+# List files
+ls
+
+# Check Git status
+git status`),
+						exerciseBlock(
+							"Open VS Code, install the ESLint and Prettier extensions, and open your my-first-repo folder. What do you see in the sidebar?",
+							"You should see the Explorer sidebar showing your project files, including HelloWorld.txt and the .git folder (if hidden files are shown). The file tree shows your entire project structure.",
+							[]string{"Look at the left sidebar", "You should see your HelloWorld.txt file", "The Explorer view shows your folder contents"},
+						),
+						textBlock(`## You're Ready!
+
+Your VS Code is now configured and ready for coding. In the upcoming exercises, you'll use VS Code to:
+
+- Edit code files
+- Run terminal commands
+- Manage Git operations
+- Debug your applications
+
+**Keep VS Code open** - you'll need it for the next modules!`),
+					},
+				},
+			},
+		},
+		{
 			Title:       "Code Concepts",
 			Description: "Fundamental programming paradigms and concepts that every developer should master.",
 			Modules: []models.Module{
@@ -4589,6 +4698,258 @@ console.log(counter()); // 1
 console.log(counter()); // 2
 console.log(counter()); // 3`),
 						calloutBlock("info", "Closures are powerful for creating private state, callbacks, and functional patterns like currying."),
+					},
+				},
+				{
+					ID:    "typescript-starter",
+					Title: "Pull the Starter Repo",
+					Content: []models.ContentBlock{
+						textBlock(`## Clone Your First TypeScript Repository
+
+Now that you have Git and VS Code set up, let's pull a real code repository and explore some fundamental programming concepts!
+
+### What We'll Do
+
+1. Clone a TypeScript starter repository
+2. Open it in VS Code
+3. Explore variables, types, and control flow
+4. Run the code and see it in action`),
+						calloutBlock("info", "TypeScript is JavaScript with types. It helps catch errors before your code runs and makes your code more readable."),
+						textBlock(`## Step 1: Clone the Repository
+
+Open your terminal (or VS Code's integrated terminal) and run:`),
+						codeBlock("bash", `# Navigate to where you want to store projects
+cd ~/projects
+
+# Clone the starter repository
+git clone https://github.com/YOUR-INSTRUCTOR/typescript-starter.git
+
+# Navigate into the project
+cd typescript-starter
+
+# Open in VS Code
+code .`),
+						calloutBlock("warning", "Your instructor will provide the actual repository URL. Replace the URL above with the one they give you!"),
+						textBlock(`## Step 2: Install Dependencies
+
+Most code projects have dependencies - libraries of code others have written. Install them with:`),
+						codeBlock("bash", `npm install`),
+						textBlock(`This reads the package.json file and downloads everything the project needs.
+
+## Step 3: Explore the Code
+
+Open the src folder in VS Code. You'll see TypeScript files (.ts) containing code examples.`),
+						textBlock(`### Variables and Types
+
+In TypeScript, variables have types that tell us what kind of data they hold:`),
+						codeBlock("typescript", `// String - text data
+let name: string = "Alice";
+
+// Number - numeric data
+let age: number = 25;
+let price: number = 19.99;
+
+// Boolean - true or false
+let isStudent: boolean = true;
+
+// Array - list of items
+let colors: string[] = ["red", "green", "blue"];
+
+// Object - structured data
+let person: { name: string; age: number } = {
+  name: "Bob",
+  age: 30
+};`),
+						calloutBlock("tip", "TypeScript can often figure out the type automatically. 'let name = \"Alice\"' works too - TypeScript knows it's a string!"),
+						textBlock(`### Control Flow
+
+Control flow determines which code runs based on conditions:`),
+						codeBlock("typescript", `// If statement - make decisions
+let temperature = 75;
+
+if (temperature > 80) {
+  console.log("It's hot!");
+} else if (temperature > 60) {
+  console.log("It's nice outside!");
+} else {
+  console.log("It's cold!");
+}
+
+// Loops - repeat code
+for (let i = 0; i < 5; i++) {
+  console.log("Count:", i);
+}
+
+// Loop through array
+let fruits = ["apple", "banana", "orange"];
+for (let fruit of fruits) {
+  console.log("I like", fruit);
+}`),
+						textBlock(`## Step 4: Run the Code
+
+Run the TypeScript code to see it in action:`),
+						codeBlock("bash", `# Compile and run
+npm start
+
+# Or run in development mode (auto-reloads)
+npm run dev`),
+						textBlock(`Watch the terminal output. You'll see the results of the code examples!`),
+						exerciseBlock(
+							"Clone the starter repository, open it in VS Code, and run 'npm install' followed by 'npm start'. What output do you see in the terminal?",
+							"You should see output from the TypeScript examples, including console.log statements showing variables, conditional results, and loop iterations. The exact output depends on the repository content your instructor provides.",
+							[]string{"Make sure you run npm install first", "The output appears in your terminal", "Look for console.log output"},
+						),
+						textBlock(`## What You've Learned
+
+- How to clone a Git repository
+- How to install project dependencies with npm
+- Basic TypeScript variables and types
+- Control flow with if statements and loops
+
+These concepts are the building blocks of all programming. You'll use them in every project you build!`),
+					},
+				},
+				{
+					ID:    "react-hello-world",
+					Title: "Your First React Page",
+					Content: []models.ContentBlock{
+						textBlock(`## Build Your First React Web Page
+
+Time to create something you can see in your browser! We'll use React (a popular UI library) and Vite (a fast build tool) to create a personal info page.
+
+### What We'll Build
+
+A simple web page about yourself that displays:
+- Your name
+- A greeting message
+- Some facts about you
+- Dynamic content that changes based on code`),
+						calloutBlock("info", "React is used by Facebook, Instagram, Netflix, and thousands of other companies. Learning React opens many doors!"),
+						textBlock(`## Step 1: Create a New React Project
+
+Open your terminal and run:`),
+						codeBlock("bash", `# Navigate to your projects folder
+cd ~/projects
+
+# Create a new Vite + React project
+npm create vite@latest my-first-page -- --template react
+
+# Navigate into the project
+cd my-first-page
+
+# Install dependencies
+npm install`),
+						textBlock(`## Step 2: Start the Development Server`),
+						codeBlock("bash", `npm run dev`),
+						textBlock(`You should see output showing that Vite is ready and running on http://localhost:5173/
+
+**Open your browser to http://localhost:5173** - you'll see the default Vite + React page!`),
+						calloutBlock("tip", "The development server auto-reloads when you save changes. Keep it running while you code!"),
+						textBlock(`## Step 3: Edit Your First Component
+
+Open src/App.jsx in VS Code. Replace ALL the content with:`),
+						codeBlock("jsx", `function App() {
+  // Your personal info - customize these!
+  const myName = "Your Name";
+  const greeting = "Hello, World!";
+  const favoriteColor = "blue";
+  const hobbies = ["coding", "reading", "gaming"];
+  const yearsLearning = 0;
+
+  return (
+    <div style={{ 
+      padding: "40px", 
+      fontFamily: "Arial, sans-serif",
+      maxWidth: "600px",
+      margin: "0 auto"
+    }}>
+      <h1 style={{ color: favoriteColor }}>
+        {greeting}
+      </h1>
+      
+      <h2>I'm {myName}</h2>
+      
+      <p>
+        I've been learning to code for {yearsLearning} years.
+        {yearsLearning === 0 && " Just getting started!"}
+      </p>
+
+      <h3>My Hobbies:</h3>
+      <ul>
+        {hobbies.map((hobby, index) => (
+          <li key={index}>{hobby}</li>
+        ))}
+      </ul>
+
+      <button 
+        onClick={() => alert("You clicked the button!")}
+        style={{
+          padding: "10px 20px",
+          fontSize: "16px",
+          cursor: "pointer"
+        }}
+      >
+        Click Me!
+      </button>
+    </div>
+  );
+}
+
+export default App;`),
+						textBlock(`**Save the file** (Ctrl+S) and watch your browser update automatically!`),
+						calloutBlock("info", "Notice how JavaScript variables like 'myName' appear inside the HTML using {curly braces}. This is JSX - HTML mixed with JavaScript!"),
+						textBlock(`## Step 4: Customize Your Page
+
+Now make it yours! Edit the variables at the top of the component:
+
+1. Change myName to your actual name
+2. Update favoriteColor to your favorite color
+3. Replace the hobbies array with your real hobbies
+4. Add more content below!`),
+						textBlock(`## Step 5: Add More Content
+
+Try adding these below the button:`),
+						codeBlock("jsx", `      <hr style={{ margin: "30px 0" }} />
+      
+      <h3>About This Page</h3>
+      <p>
+        This is my first React page! I built it while learning 
+        web development. The content above is generated from 
+        JavaScript variables, not hardcoded HTML.
+      </p>
+
+      <h3>What I'm Learning:</h3>
+      <ul>
+        <li>Git and GitHub</li>
+        <li>VS Code</li>
+        <li>TypeScript basics</li>
+        <li>React and Vite</li>
+      </ul>`),
+						exerciseBlock(
+							"Customize your React page with your real name, hobbies, and favorite color. Add at least one new section about yourself. What happens when you save the file?",
+							"When you save the file, Vite's hot module replacement (HMR) automatically updates your browser without a full page refresh. Your changes appear instantly! The page should now show your personalized content.",
+							[]string{"Edit the variables at the top of App.jsx", "Save with Ctrl+S", "Watch your browser update automatically"},
+						),
+						textBlock(`## Understanding What You Built
+
+Let's break down what's happening:
+
+- **Variables**: const myName = "..." stores data you can use anywhere
+- **JSX**: HTML-like syntax that lets you use JavaScript with {curly braces}
+- **Props and State**: The foundation of React (we'll learn more later!)
+- **Event Handling**: onClick runs code when you click
+- **Array.map()**: Converts an array into a list of elements`),
+						textBlock(`## Congratulations!
+
+You just built your first web page with React! This is the same technology used to build:
+
+- Facebook and Instagram
+- Netflix's interface
+- Airbnb's website
+- Discord's app
+
+You're on your way to becoming a web developer!`),
+						calloutBlock("tip", "Keep this project! You can expand it as you learn more. Try adding images, more sections, or even multiple pages!"),
 					},
 				},
 			},

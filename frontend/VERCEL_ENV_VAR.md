@@ -43,3 +43,6 @@ After redeploy, check:
 3. Check Network tab
 4. Look for API calls - they should go to `pathway-edu-production.up.railway.app` not `localhost:8080`
 
+
+
+

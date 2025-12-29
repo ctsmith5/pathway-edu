@@ -89,3 +89,6 @@ go run cmd/seed/main.go
 curl https://your-railway-url.up.railway.app/api/courses
 ```
 
+
+
+

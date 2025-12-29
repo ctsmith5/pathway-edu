@@ -82,3 +82,35 @@ func (h *Handler) GetUserProgress(c *gin.Context) {
 
 	c.JSON(http.StatusOK, coursesWithProgress)
 }
+
+// CompleteModuleRequest represents the request body for completing a module
+type CompleteModuleRequest struct {
+	CourseID string `json:"course_id" binding:"required"`
+	ModuleID string `json:"module_id" binding:"required"`
+}
+
+// CompleteModule marks a module as complete for the authenticated user
+func (h *Handler) CompleteModule(c *gin.Context) {
+	userID := c.GetString("userID")
+	if userID == "" {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "User not authenticated"})
+		return
+	}
+
+	var req CompleteModuleRequest
+	if err := c.ShouldBindJSON(&req); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid request body"})
+		return
+	}
+
+	if err := h.Repo.MarkModuleComplete(userID, req.CourseID, req.ModuleID); err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to mark module as complete"})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"message":   "Module marked as complete",
+		"course_id": req.CourseID,
+		"module_id": req.ModuleID,
+	})
+}

@@ -15,17 +15,20 @@ const ModuleView = () => {
   const [moduleIndex, setModuleIndex] = useState(-1);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isCompleted, setIsCompleted] = useState(false);
+  const [completing, setCompleting] = useState(false);
 
   useEffect(() => {
-    const fetchCourse = async () => {
+    const fetchCourseAndProgress = async () => {
       try {
-        const response = await fetch(`${API_URL}/courses/${courseId}`);
+        // Fetch course
+        const courseResponse = await fetch(`${API_URL}/courses/${courseId}`);
         
-        if (!response.ok) {
+        if (!courseResponse.ok) {
           throw new Error('Course not found');
         }
 
-        const courseData = await response.json();
+        const courseData = await courseResponse.json();
         setCourse(courseData);
 
         // Find the current module
@@ -36,6 +39,22 @@ const ModuleView = () => {
 
         setModuleIndex(index);
         setCurrentModule(courseData.modules[index]);
+
+        // Fetch user progress to check if module is completed
+        if (token) {
+          const progressResponse = await fetch(`${API_URL}/user/progress`, {
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
+          });
+          if (progressResponse.ok) {
+            const progressData = await progressResponse.json();
+            const courseProgress = progressData.find(p => p.course.id === courseId);
+            if (courseProgress && courseProgress.completed_modules?.includes(moduleId)) {
+              setIsCompleted(true);
+            }
+          }
+        }
       } catch (err) {
         setError(err.message);
       } finally {
@@ -43,8 +62,37 @@ const ModuleView = () => {
       }
     };
 
-    fetchCourse();
-  }, [courseId, moduleId]);
+    fetchCourseAndProgress();
+  }, [courseId, moduleId, token]);
+
+  const handleMarkComplete = async () => {
+    if (completing || isCompleted) return;
+    
+    setCompleting(true);
+    try {
+      const response = await fetch(`${API_URL}/user/progress/complete`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          course_id: courseId,
+          module_id: moduleId
+        })
+      });
+
+      if (response.ok) {
+        setIsCompleted(true);
+      } else {
+        console.error('Failed to mark module as complete');
+      }
+    } catch (err) {
+      console.error('Error marking module complete:', err);
+    } finally {
+      setCompleting(false);
+    }
+  };
 
   const handlePrevious = () => {
     if (moduleIndex > 0 && course) {
@@ -117,6 +165,24 @@ const ModuleView = () => {
               <p>Content coming soon...</p>
             </div>
           )}
+
+          {/* Complete Module Button */}
+          <div className="module-complete-section">
+            {isCompleted ? (
+              <div className="module-complete-badge">
+                <span className="complete-icon">✓</span>
+                <span>Module Completed!</span>
+              </div>
+            ) : (
+              <button 
+                className="module-complete-btn"
+                onClick={handleMarkComplete}
+                disabled={completing}
+              >
+                {completing ? 'Marking Complete...' : 'Mark as Complete'}
+              </button>
+            )}
+          </div>
         </main>
 
         {/* Navigation Footer */}

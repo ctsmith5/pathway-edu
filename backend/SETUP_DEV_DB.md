@@ -90,3 +90,6 @@ railway variables set MONGO_URI="mongodb+srv://colinsmith356_db_user:C0vfefe%242
 railway variables set DB_NAME="pathway"
 ```
 
+
+
+
