@@ -159,11 +159,9 @@ const ViewCurriculum = () => {
                     </div>
                     <div className="course-card__body">
                       <div className="course-why">
-                        <h4>Why Learn This?</h4>
                         <p>{course.why}</p>
                       </div>
                       <div className="course-outcome">
-                        <h4>What You'll Achieve</h4>
                         <p>{course.outcome}</p>
                       </div>
                     </div>
@@ -194,3 +192,4 @@ const ViewCurriculum = () => {
 };
 
 export default ViewCurriculum;
+

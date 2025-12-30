@@ -93,3 +93,4 @@ curl https://your-railway-url.up.railway.app/api/courses
 
 
 
+

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import './LoginModal.css';
@@ -11,7 +11,7 @@ const LoginModal = ({ isOpen, onClose }) => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  
+  const mouseDownTarget = useRef(null);
   const { login, register } = useAuth();
   const navigate = useNavigate();
 
@@ -64,7 +64,15 @@ const LoginModal = ({ isOpen, onClose }) => {
   };
 
   return (
-    <div className="modal-overlay" onClick={onClose}>
+      <div 
+        className="modal-overlay" 
+        onMouseDown={(e) => { mouseDownTarget.current = e.target; }}
+        onClick={(e) => {
+          if (e.target === e.currentTarget && mouseDownTarget.current === e.currentTarget) {
+            onClose();
+          }
+        }}
+      >
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         <button className="modal-close" onClick={onClose}>&times;</button>
         
