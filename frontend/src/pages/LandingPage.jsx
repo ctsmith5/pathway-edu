@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './LandingPage.css';
 
 const LandingPage = () => {
@@ -14,8 +15,8 @@ const LandingPage = () => {
             Give them the tools to build the future.
           </p>
           <div className="hero-buttons">
-            <button className="cta-button primary">Get Started Today</button>
-            <button className="cta-button secondary">View Curriculum</button>
+            <Link to="/dashboard" className="cta-button primary">Get Started Today</Link>
+            <Link to="/curriculum" className="cta-button secondary">View Curriculum</Link>
           </div>
         </div>
       </div>
@@ -71,7 +72,7 @@ const LandingPage = () => {
             <p>
               We empower students to build a portfolio that speaks for itself. No fluff, just code.
             </p>
-            <button className="cta-button primary">Learn More About Us</button>
+            <Link to="/curriculum" className="cta-button primary">Learn More About Us</Link>
           </div>
           <div className="about-image">
              <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80" alt="Team working together" />

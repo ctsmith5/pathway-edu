@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { AuthProvider } from './context/AuthContext'
 import Navbar from './components/Navbar'
 import LandingPage from './pages/LandingPage'
+import ViewCurriculum from './pages/ViewCurriculum'
 import ChaptersView from './pages/ChaptersView'
 import ChapterDetailView from './pages/ChapterDetailView'
 import CoursesView from './pages/CoursesView'
@@ -26,6 +27,7 @@ function App() {
           <LoginModal isOpen={isLoginOpen} onClose={closeLogin} />
           <Routes>
             <Route path="/" element={<LandingPage />} />
+            <Route path="/curriculum" element={<ViewCurriculum />} />
             <Route 
               path="/dashboard" 
               element={
