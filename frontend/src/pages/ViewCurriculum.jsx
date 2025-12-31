@@ -193,3 +193,4 @@ const ViewCurriculum = () => {
 
 export default ViewCurriculum;
 
+

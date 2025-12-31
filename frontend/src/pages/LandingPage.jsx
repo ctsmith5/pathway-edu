@@ -15,7 +15,7 @@ const LandingPage = () => {
             Give them the tools to build the future.
           </p>
           <div className="hero-buttons">
-            <Link to="/dashboard" className="cta-button primary">Get Started Today</Link>
+            <span className="cta-button primary disabled">Beta Coming Soon</span>
             <Link to="/curriculum" className="cta-button secondary">View Curriculum</Link>
           </div>
         </div>

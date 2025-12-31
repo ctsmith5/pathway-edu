@@ -82,6 +82,12 @@
   background-color: rgba(255,255,255,0.05);
 }
 
+.cta-button.disabled {
+  opacity: 0.7;
+  cursor: default;
+  pointer-events: none;
+}
+
 /* Features Section */
 .features-section {
   padding: 80px 24px;
