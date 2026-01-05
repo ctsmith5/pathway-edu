@@ -57,6 +57,44 @@ export const chapters = [
         description: 'Set up Vite + React and create your first web page'
       }
     ]
+  },
+  {
+    id: 'chapter-2',
+    title: 'Coding Foundations',
+    description: 'Learn beginner-friendly programming fundamentals (how code is structured, how programs make decisions), then build a real TypeScript class and a fun React animation to visualize the classic FizzBuzz challenge.',
+    estimatedTime: '1 week',
+    items: [
+      {
+        courseTitle: 'Code Concepts',
+        moduleId: 'code-5',
+        title: 'Programming Languages 101',
+        description: 'Understand how languages like C#, JavaScript, and TypeScript compare'
+      },
+      {
+        courseTitle: 'Code Concepts',
+        moduleId: 'code-1',
+        title: 'Object-Oriented Programming',
+        description: 'Learn what classes and objects are and why they matter'
+      },
+      {
+        courseTitle: 'Code Concepts',
+        moduleId: 'code-6',
+        title: 'Control Flow',
+        description: 'Learn how programs make decisions and repeat work'
+      },
+      {
+        courseTitle: 'Code Concepts',
+        moduleId: 'fizzbuzz-class',
+        title: 'FizzBuzz Engine (TypeScript Class)',
+        description: 'Build a TypeScript class that solves FizzBuzz'
+      },
+      {
+        courseTitle: 'Code Concepts',
+        moduleId: 'fizzbuzz-galton-ui',
+        title: 'FizzBuzz Galton Board UI',
+        description: 'Build a small React animation that visualizes FizzBuzz results'
+      }
+    ]
   }
 ];
 

@@ -4952,6 +4952,428 @@ You're on your way to becoming a web developer!`),
 						calloutBlock("tip", "Keep this project! You can expand it as you learn more. Try adding images, more sections, or even multiple pages!"),
 					},
 				},
+				{
+					ID:    "code-5",
+					Title: "Programming Languages 101 (C#, JavaScript, TypeScript)",
+					Content: []models.ContentBlock{
+						textBlock(`## Programming Languages 101
+
+When people say "learn to code", what they really mean is:
+
+- Learn to **give instructions** to a computer
+- Learn to **organize** those instructions so other people can understand them
+- Learn to **debug** when the computer does something unexpected
+
+Different languages are different ways of writing those instructions.
+
+## C# vs JavaScript vs TypeScript (in plain English)
+
+### JavaScript
+- The language of the web browser
+- Great for building interactive websites
+- Very flexible, but that flexibility can cause confusing bugs for beginners
+
+### TypeScript
+- JavaScript with "labels" (types) that help you catch mistakes early
+- Used heavily in professional teams because it improves readability and reliability
+- You still write JavaScript, but with extra safety
+
+### C#
+- A popular "backend and apps" language used by many companies
+- Common in enterprise software, games (Unity), and APIs
+- Encourages structure and object-oriented design
+
+## Two ideas that matter (without the jargon)
+
+### 1) Where does the code run?
+- JavaScript/TypeScript can run in the **browser** (front-end) or on a server (Node.js).
+- C# usually runs on a **server**, desktop, or game engine.
+
+### 2) How strict is the language?
+- JavaScript: more "do whatever you want"
+- TypeScript: "be clear about what data is"
+- C#: more structured and strict by default
+
+**Bottom line:** Most programming ideas are the same across languages. If you learn the fundamentals once, switching languages is like switching from one brand of car to another.`),
+						exerciseBlock(
+							"Write down one reason a team might choose TypeScript over JavaScript for a large project.",
+							"TypeScript helps catch errors before runtime and makes code easier to understand by making data types explicit. This reduces bugs and improves teamwork in large codebases.",
+							[]string{"Think about teamwork and catching mistakes early", "Types are like labels that explain what a value is"},
+						),
+					},
+				},
+				{
+					ID:    "code-6",
+					Title: "Control Flow (How Programs Make Decisions)",
+					Content: []models.ContentBlock{
+						textBlock(`## Control Flow: The "Choose Your Own Adventure" of Code
+
+Control flow is how a program decides:
+- **What to do next**
+- **When to repeat**
+- **When to stop**
+
+If programming is like writing instructions for a robot, control flow is how you say:
+- "If the door is closed, open it"
+- "Do this 10 times"
+- "Keep doing this until the button is pressed"
+
+## The core tools (TypeScript examples)
+
+### If / Else (decisions)`),
+						codeBlock("typescript", `const score = 87;
+
+if (score >= 90) {
+  console.log("A");
+} else if (score >= 80) {
+  console.log("B");
+} else {
+  console.log("Keep going!");
+}`),
+						textBlock(`### Switch (many options)`),
+						codeBlock("typescript", `const day = "Monday";
+
+switch (day) {
+  case "Monday":
+    console.log("Start strong");
+    break;
+  case "Friday":
+    console.log("Almost there");
+    break;
+  default:
+    console.log("Another day, another step");
+}`),
+						textBlock(`### Loops (repetition)`),
+						codeBlock("typescript", `// for: when you know how many times
+for (let i = 1; i <= 5; i++) {
+  console.log("Count:", i);
+}
+
+// while: when you repeat until something changes
+let lives = 3;
+while (lives > 0) {
+  console.log("Lives:", lives);
+  lives--;
+}`),
+						calloutBlock("tip", "The most common bug in beginner loops is an off-by-one error (starting at 0 vs 1, or stopping too early/late)."),
+						exerciseBlock(
+							"Write a loop that prints the numbers 1 through 20. For each number, print whether it is even or odd.",
+							"A common solution uses a for loop and the modulo operator (%). Example: if (n % 2 === 0) it's even; otherwise it's odd.",
+							[]string{"Use n % 2 to check remainder", "If remainder is 0, it's even"},
+						),
+					},
+				},
+				{
+					ID:    "fizzbuzz-class",
+					Title: "Build a TypeScript Class (FizzBuzz Engine)",
+					Content: []models.ContentBlock{
+						textBlock(`## The Goal
+
+You're going to build a tiny "engine" in TypeScript that solves the classic FizzBuzz challenge.
+
+FizzBuzz rules:
+- If a number is divisible by 3 → "Fizz"
+- If a number is divisible by 5 → "Buzz"
+- If divisible by both → "FizzBuzz"
+- Otherwise → the number itself
+
+## Step 1: Create a TypeScript React project
+
+If your current React project is JavaScript, it’s totally fine to make a new one for this exercise:
+`),
+						codeBlock("bash", `cd ~/projects
+npm create vite@latest fizzbuzz-lab -- --template react-ts
+cd fizzbuzz-lab
+npm install
+npm run dev`),
+						textBlock(`## Step 2: Add a class file
+
+Create a new file:
+
+src/lib/FizzBuzzEngine.ts
+
+Paste this code:`),
+						codeBlock("typescript", `export type FizzBuzzResult = "Fizz" | "Buzz" | "FizzBuzz" | string;
+
+export class FizzBuzzEngine {
+  public valueFor(n: number): FizzBuzzResult {
+    if (!Number.isInteger(n)) return "Not a whole number";
+
+    const divisibleBy3 = n % 3 === 0;
+    const divisibleBy5 = n % 5 === 0;
+
+    if (divisibleBy3 && divisibleBy5) return "FizzBuzz";
+    if (divisibleBy3) return "Fizz";
+    if (divisibleBy5) return "Buzz";
+    return String(n);
+  }
+}`),
+						textBlock(`## Step 3: Try it quickly in the UI
+
+Open src/App.tsx and temporarily replace the default content with:`),
+						codeBlock("tsx", `import { useMemo } from "react";
+import { FizzBuzzEngine } from "./lib/FizzBuzzEngine";
+
+export default function App() {
+  const engine = useMemo(() => new FizzBuzzEngine(), []);
+
+  const results = [];
+  for (let n = 1; n <= 30; n++) {
+    results.push({ n, value: engine.valueFor(n) });
+  }
+
+  return (
+    <div style={{ padding: 24, fontFamily: "system-ui, Arial" }}>
+      <h1>FizzBuzz (Engine Test)</h1>
+      <ol>
+        {results.map((r) => (
+          <li key={r.n}>
+            {r.n} → <strong>{r.value}</strong>
+          </li>
+        ))}
+      </ol>
+    </div>
+  );
+}`),
+						calloutBlock("info", "Notice the separation: the class does the logic; the React component just displays results. This is a professional habit."),
+						exerciseBlock(
+							"Change the engine so that it also returns 'Bazz' for numbers divisible by 7. How would you add this without breaking the original rules?",
+							"You can add another divisibility check (n % 7 === 0) and decide how to combine labels. A clean approach is to build a string result and append parts (e.g., result += 'Fizz').",
+							[]string{"Try building the output string step-by-step", "Think about combining multiple rules"},
+						),
+					},
+				},
+				{
+					ID:    "fizzbuzz-galton-ui",
+					Title: "Coding Exercise: FizzBuzz Galton Board Animation (React + TypeScript)",
+					Content: []models.ContentBlock{
+						textBlock(`## What You're Building
+
+You’ll build a small animated UI that *visualizes* your FizzBuzz engine.
+
+Imagine numbers dropping from the top like a Galton board:
+- Each number "falls" down the screen
+- It lands in one of four buckets:
+  - Fizz
+  - Buzz
+  - FizzBuzz
+  - Number
+
+This teaches you:
+- How to use your TypeScript class from React
+- How to model data in state
+- How to animate UI changes with CSS
+- How to build a small system end-to-end
+
+## Step 1: Create a component file
+
+Create:
+
+src/components/GaltonFizzBuzz.tsx
+
+Paste this starter code:`),
+						codeBlock("tsx", `import { useEffect, useMemo, useRef, useState } from "react";
+import { FizzBuzzEngine } from "../lib/FizzBuzzEngine";
+import "./GaltonFizzBuzz.css";
+
+type Bucket = "Fizz" | "Buzz" | "FizzBuzz" | "Number";
+
+type Ball = {
+  id: string;
+  n: number;
+  bucket: Bucket;
+  leftPx: number;
+};
+
+function bucketFor(value: string): Bucket {
+  if (value === "FizzBuzz") return "FizzBuzz";
+  if (value === "Fizz") return "Fizz";
+  if (value === "Buzz") return "Buzz";
+  return "Number";
+}
+
+export default function GaltonFizzBuzz() {
+  const engine = useMemo(() => new FizzBuzzEngine(), []);
+
+  const nextN = useRef(1);
+  const [balls, setBalls] = useState<Ball[]>([]);
+  const [counts, setCounts] = useState<Record<Bucket, number>>({
+    Fizz: 0,
+    Buzz: 0,
+    FizzBuzz: 0,
+    Number: 0,
+  });
+
+  useEffect(() => {
+    const interval = window.setInterval(() => {
+      const n = nextN.current++;
+      const value = engine.valueFor(n);
+      const bucket = bucketFor(value);
+
+      // Place balls roughly above their target bucket, with a little random wobble
+      const bucketCenters: Record<Bucket, number> = {
+        Fizz: 110,
+        Buzz: 250,
+        FizzBuzz: 390,
+        Number: 530,
+      };
+
+      const leftPx = bucketCenters[bucket] + (Math.random() * 40 - 20);
+
+      const ball: Ball = {
+        id: String(Date.now()) + "-" + String(Math.random()),
+        n,
+        bucket,
+        leftPx,
+      };
+
+      setBalls((prev) => [...prev, ball]);
+    }, 650);
+
+    return () => window.clearInterval(interval);
+  }, [engine]);
+
+  const handleBallLanded = (ball: Ball) => {
+    setBalls((prev) => prev.filter((b) => b.id !== ball.id));
+    setCounts((prev) => ({ ...prev, [ball.bucket]: prev[ball.bucket] + 1 }));
+  };
+
+  return (
+    <div className="galton">
+      <h2>FizzBuzz Galton Board</h2>
+
+      <div className="board">
+        {balls.map((ball) => (
+          <div
+            key={ball.id}
+            className={"ball ball--" + ball.bucket.toLowerCase()}
+            style={{ left: ball.leftPx }}
+            onAnimationEnd={() => handleBallLanded(ball)}
+            title={"n=" + ball.n + " -> " + engine.valueFor(ball.n)}
+          >
+            {ball.n}
+          </div>
+        ))}
+
+        <div className="buckets">
+          <div className="bucket">
+            <div className="bucket__label">Fizz</div>
+            <div className="bucket__count">{counts.Fizz}</div>
+          </div>
+          <div className="bucket">
+            <div className="bucket__label">Buzz</div>
+            <div className="bucket__count">{counts.Buzz}</div>
+          </div>
+          <div className="bucket">
+            <div className="bucket__label">FizzBuzz</div>
+            <div className="bucket__count">{counts.FizzBuzz}</div>
+          </div>
+          <div className="bucket">
+            <div className="bucket__label">Number</div>
+            <div className="bucket__count">{counts.Number}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}`),
+						textBlock(`## Step 2: Add the CSS animation
+
+Create:
+
+src/components/GaltonFizzBuzz.css
+
+Paste this CSS:`),
+						codeBlock("css", `.galton {
+  padding: 24px;
+  font-family: system-ui, Arial, sans-serif;
+}
+
+.board {
+  position: relative;
+  height: 520px;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 12px;
+  background: rgba(255,255,255,0.03);
+  overflow: hidden;
+}
+
+.ball {
+  position: absolute;
+  top: -40px;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: #0f172a;
+  animation: fall 1.2s cubic-bezier(.2,.9,.25,1) forwards;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.25);
+}
+
+.ball--fizz { background: #a7f3d0; }
+.ball--buzz { background: #bfdbfe; }
+.ball--fizzbuzz { background: #fecaca; }
+.ball--number { background: #fde68a; }
+
+@keyframes fall {
+  0% { transform: translateY(0); opacity: 0.9; }
+  80% { transform: translateY(420px); }
+  100% { transform: translateY(450px); opacity: 1; }
+}
+
+.buckets {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 140px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  padding: 12px;
+  background: rgba(0,0,0,0.2);
+  border-top: 1px solid rgba(255,255,255,0.12);
+}
+
+.bucket {
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.bucket__label {
+  font-weight: 700;
+  color: rgba(255,255,255,0.9);
+}
+
+.bucket__count {
+  font-weight: 800;
+  font-size: 20px;
+  color: rgba(255,255,255,0.9);
+}`),
+						textBlock(`## Step 3: Render it in App.tsx
+
+Update src/App.tsx to render your new component:`),
+						codeBlock("tsx", `import GaltonFizzBuzz from "./components/GaltonFizzBuzz";
+
+export default function App() {
+  return <GaltonFizzBuzz />;
+}`),
+						calloutBlock("tip", "If the balls all land in 'Number', check your FizzBuzz rules first. The UI is only as correct as the engine!"),
+						exerciseBlock(
+							"Add two buttons: Pause/Resume and Reset Counts. (Hint: store a boolean in state and only create the interval when running.)",
+							"A typical solution uses a running boolean in state and conditionally starts/stops the interval in useEffect. Reset counts by setting the counts state back to zeros and clearing balls.",
+							[]string{"Add a `running` state boolean", "In useEffect, only setInterval when running is true", "Reset counts by setting state back to the initial object"},
+						),
+					},
+				},
 			},
 		},
 	}
