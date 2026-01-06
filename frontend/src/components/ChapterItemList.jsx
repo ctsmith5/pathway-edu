@@ -3,11 +3,6 @@ import { Link } from 'react-router-dom';
 import './ChapterItemList.css';
 
 const ChapterItemList = ({ items, completedModules = [], coursesMap = {} }) => {
-  // Find the first uncompleted item index
-  const firstUncompletedIndex = items.findIndex(
-    item => !completedModules.includes(item.moduleId)
-  );
-
   const getModuleLink = (item) => {
     const course = Object.values(coursesMap).find(c => 
       c.modules?.some(m => m.id === item.moduleId)
@@ -22,20 +17,16 @@ const ChapterItemList = ({ items, completedModules = [], coursesMap = {} }) => {
     <div className="chapter-items">
       {items.map((item, index) => {
         const isCompleted = completedModules.includes(item.moduleId);
-        const isLocked = !isCompleted && index > firstUncompletedIndex && firstUncompletedIndex !== -1;
-        const isCurrent = index === firstUncompletedIndex;
         const moduleLink = getModuleLink(item);
 
         return (
           <div 
             key={item.moduleId}
-            className={`chapter-item ${isCompleted ? 'chapter-item--completed' : ''} ${isLocked ? 'chapter-item--locked' : ''} ${isCurrent ? 'chapter-item--current' : ''}`}
+            className={`chapter-item ${isCompleted ? 'chapter-item--completed' : ''}`}
           >
             <div className="chapter-item__number">
               {isCompleted ? (
                 <span className="chapter-item__check">✓</span>
-              ) : isLocked ? (
-                <span className="chapter-item__lock">🔒</span>
               ) : (
                 <span>{index + 1}</span>
               )}
@@ -52,14 +43,12 @@ const ChapterItemList = ({ items, completedModules = [], coursesMap = {} }) => {
             </div>
 
             <div className="chapter-item__action">
-              {isLocked ? (
-                <span className="chapter-item__locked-text">Complete previous items first</span>
-              ) : moduleLink ? (
+              {moduleLink ? (
                 <Link 
                   to={moduleLink}
                   className={`chapter-item__button ${isCompleted ? 'chapter-item__button--review' : ''}`}
                 >
-                  {isCompleted ? 'Review' : isCurrent ? 'Start' : 'View'}
+                  {isCompleted ? 'Review' : 'Start'}
                 </Link>
               ) : (
                 <span className="chapter-item__coming-soon">Coming soon</span>

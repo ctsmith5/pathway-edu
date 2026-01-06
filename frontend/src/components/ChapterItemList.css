@@ -16,7 +16,7 @@
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.chapter-item:hover:not(.chapter-item--locked) {
+.chapter-item:hover {
   border-color: var(--primary-light, #a5b4fc);
   box-shadow: 0 2px 8px rgba(99, 102, 241, 0.1);
 }
@@ -31,10 +31,6 @@
   box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
 }
 
-.chapter-item--locked {
-  opacity: 0.6;
-  background: var(--bg-secondary, #f9fafb);
-}
 
 .chapter-item__number {
   width: 48px;
@@ -88,9 +84,6 @@
   margin: 0;
 }
 
-.chapter-item--locked .chapter-item__title {
-  color: var(--text-secondary, #6b7280);
-}
 
 .chapter-item__course {
   font-size: 0.75rem;
@@ -148,12 +141,6 @@
   background: var(--success-dark, #059669);
 }
 
-.chapter-item__locked-text {
-  font-size: 0.8125rem;
-  color: var(--text-tertiary, #9ca3af);
-  font-style: italic;
-}
-
 .chapter-item__coming-soon {
   font-size: 0.8125rem;
   color: var(--text-tertiary, #9ca3af);
@@ -184,7 +171,6 @@
     width: 100%;
   }
 
-  .chapter-item__locked-text,
   .chapter-item__coming-soon {
     text-align: center;
     width: 100%;
