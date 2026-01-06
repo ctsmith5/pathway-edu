@@ -149,9 +149,26 @@ const ModuleView = () => {
         {/* Module Header */}
         <header className="module-header">
           <div className="module-header__info">
-            <span className="module-number">
-              Module {moduleIndex + 1} of {course?.modules.length}
-            </span>
+            <div className="module-progress">
+              <div className="module-progress__pods" aria-label={`Module progress: ${moduleIndex + 1} of ${course?.modules.length || 0}`}>
+                {Array.from({ length: course?.modules.length || 0 }).map((_, i) => (
+                  <span
+                    key={i}
+                    className={[
+                      'module-progress__pod',
+                      i < moduleIndex + 1 ? 'module-progress__pod--filled' : '',
+                      i === moduleIndex ? 'module-progress__pod--current' : '',
+                    ].filter(Boolean).join(' ')}
+                  />
+                ))}
+              </div>
+              <div className="module-progress__label">
+                <span className="module-progress__label-key">Module:</span>{' '}
+                <span className="module-progress__label-value">
+                  {moduleIndex + 1} of {course?.modules.length}
+                </span>
+              </div>
+            </div>
             <h1>{currentModule?.title}</h1>
           </div>
         </header>
