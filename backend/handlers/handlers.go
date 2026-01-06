@@ -2,9 +2,12 @@ package handlers
 
 import (
 	"net/http"
+	"os"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/pathway/backend/repository"
+	"github.com/pathway/backend/seed"
 )
 
 type Handler struct {
@@ -112,5 +115,36 @@ func (h *Handler) CompleteModule(c *gin.Context) {
 		"message":   "Module marked as complete",
 		"course_id": req.CourseID,
 		"module_id": req.ModuleID,
+	})
+}
+
+// AdminSeedCourses reseeds the courses collection.
+// This is intentionally protected by an env var + header token so it can't be triggered accidentally.
+//
+// To enable:
+// - Set ADMIN_SEED_TOKEN on the backend service
+// - Call POST /api/admin/seed with header X-Admin-Seed-Token: <token>
+func (h *Handler) AdminSeedCourses(c *gin.Context) {
+	seedToken := os.Getenv("ADMIN_SEED_TOKEN")
+	if seedToken == "" {
+		// Hide the endpoint if not configured
+		c.JSON(http.StatusNotFound, gin.H{"error": "Not found"})
+		return
+	}
+
+	provided := c.GetHeader("X-Admin-Seed-Token")
+	if provided == "" || provided != seedToken {
+		c.JSON(http.StatusForbidden, gin.H{"error": "Forbidden"})
+		return
+	}
+
+	if err := seed.SeedCourses(h.Repo); err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to seed courses"})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"message":   "Courses seeded successfully",
+		"seeded_at": time.Now().UTC().Format(time.RFC3339),
 	})
 }

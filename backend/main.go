@@ -95,6 +95,12 @@ func main() {
 			user.GET("/progress", h.GetUserProgress)
 			user.POST("/progress/complete", h.CompleteModule)
 		}
+
+		// Admin maintenance routes (token-protected; disabled unless configured)
+		admin := api.Group("/admin")
+		{
+			admin.POST("/seed", h.AdminSeedCourses)
+		}
 	}
 
 	// Start Server
