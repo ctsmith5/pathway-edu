@@ -3,6 +3,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { API_URL } from '../config/api';
 import { ContentRenderer } from '../components/content';
+import { chapters } from '../data/chapters';
 import './ModuleView.css';
 
 const ModuleView = () => {
@@ -133,6 +134,9 @@ const ModuleView = () => {
 
   const hasPrevious = moduleIndex > 0;
   const hasNext = course && moduleIndex < course.modules.length - 1;
+  const chapterForModule = chapters.find(ch =>
+    ch.items?.some(item => item.moduleId === moduleId)
+  );
 
   return (
     <div className="module-view">
@@ -141,7 +145,13 @@ const ModuleView = () => {
         <nav className="module-breadcrumb">
           <Link to="/dashboard">Dashboard</Link>
           <span className="breadcrumb-separator">/</span>
-          <span className="breadcrumb-course">{course?.title}</span>
+          {chapterForModule ? (
+            <Link to={`/chapter/${chapterForModule.id}`} className="breadcrumb-course-link">
+              {chapterForModule.title}
+            </Link>
+          ) : (
+            <span className="breadcrumb-course">{course?.title}</span>
+          )}
           <span className="breadcrumb-separator">/</span>
           <span className="breadcrumb-current">{currentModule?.title}</span>
         </nav>

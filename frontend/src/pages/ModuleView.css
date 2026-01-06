@@ -79,6 +79,15 @@
   color: var(--text-secondary);
 }
 
+.breadcrumb-course-link {
+  color: var(--accent-primary);
+  text-decoration: none;
+}
+
+.breadcrumb-course-link:hover {
+  text-decoration: underline;
+}
+
 .breadcrumb-current {
   color: var(--text-primary);
   font-weight: 500;
