@@ -6,7 +6,7 @@ import CourseProgressCard from '../components/CourseProgressCard';
 import './CoursesView.css';
 
 const CoursesView = () => {
-  const { user, token } = useAuth();
+  const { token } = useAuth();
   const [coursesWithProgress, setCoursesWithProgress] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);

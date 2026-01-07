@@ -41,9 +41,6 @@ const ProfileView = () => {
   // Calculate stats
   const totalCourses = coursesWithProgress.length;
   const completedCourses = coursesWithProgress.filter(c => c.is_completed).length;
-  const totalModules = coursesWithProgress.reduce(
-    (acc, c) => acc + (c.course.modules?.length || 0), 0
-  );
   const completedModules = coursesWithProgress.reduce(
     (acc, c) => acc + (c.completed_modules?.length || 0), 0
   );

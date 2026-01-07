@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './ChapterCard.css';
 
-const ChapterCard = ({ chapter, completedModules = [], coursesMap = {} }) => {
+const ChapterCard = ({ chapter, completedModules = [] }) => {
   const { id, title, description, estimatedTime, items } = chapter;
 
   // Calculate progress based on completed modules
@@ -16,17 +16,6 @@ const ChapterCard = ({ chapter, completedModules = [], coursesMap = {} }) => {
 
   // Find the next uncompleted item
   const nextItem = items.find(item => !completedModules.includes(item.moduleId));
-
-  // Get course ID for the next item
-  const getModuleLink = (item) => {
-    const course = Object.values(coursesMap).find(c => 
-      c.modules?.some(m => m.id === item.moduleId)
-    );
-    if (course) {
-      return `/module/${course.id}/${item.moduleId}`;
-    }
-    return null;
-  };
 
   return (
     <div className={`chapter-card ${isCompleted ? 'chapter-card--completed' : ''}`}>

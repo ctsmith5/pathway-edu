@@ -95,6 +95,56 @@ export const chapters = [
         description: 'Build a small React animation that visualizes FizzBuzz results'
       }
     ]
+  },
+  {
+    id: 'chapter-3',
+    title: 'HTTP & Web Networking',
+    description: 'Learn how the web actually works: HTTP requests and responses, common methods and status codes, headers and cookies, REST API design, and the basics of HTTPS security.',
+    estimatedTime: '1 week',
+    items: [
+      {
+        courseTitle: 'HTTP Networking',
+        moduleId: 'http-1',
+        title: 'HTTP Fundamentals',
+        description: 'Understand what HTTP is and how requests and responses work'
+      },
+      {
+        courseTitle: 'HTTP Networking',
+        moduleId: 'http-2',
+        title: 'HTTP Methods',
+        description: 'Learn GET, POST, PUT, PATCH, DELETE, and when to use each'
+      },
+      {
+        courseTitle: 'HTTP Networking',
+        moduleId: 'http-3',
+        title: 'HTTP Status Codes',
+        description: 'Learn what 200s, 400s, and 500s mean (and how to use them)'
+      },
+      {
+        courseTitle: 'HTTP Networking',
+        moduleId: 'http-4',
+        title: 'Headers & Cookies',
+        description: 'Learn how metadata and cookies move through web requests'
+      },
+      {
+        courseTitle: 'HTTP Networking',
+        moduleId: 'http-5',
+        title: 'REST API Design',
+        description: 'Design clean, predictable endpoints that clients can use easily'
+      },
+      {
+        courseTitle: 'HTTP Networking',
+        moduleId: 'http-6',
+        title: 'Request/Response Cycle',
+        description: 'Understand the full lifecycle of a web request (DNS, TCP, TLS, HTTP)'
+      },
+      {
+        courseTitle: 'HTTP Networking',
+        moduleId: 'http-7',
+        title: 'HTTPS & Security',
+        description: 'Understand why HTTPS matters and the basics of web security'
+      }
+    ]
   }
 ];
 
