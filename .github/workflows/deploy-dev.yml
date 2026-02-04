@@ -1,0 +1,40 @@
+name: Deploy and Seed Dev Environment
+
+on:
+  push:
+    branches:
+      - development
+
+jobs:
+  deploy-and-seed:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.21'
+
+      - name: Install Railway CLI
+        run: npm install -g @railway/cli
+
+      - name: Deploy to Railway
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_DEV_TOKEN }}
+        run: |
+          cd backend
+          railway link --project ${{ secrets.RAILWAY_DEV_PROJECT_ID }} --service ${{ secrets.RAILWAY_DEV_SERVICE_ID }}
+          railway up
+
+      - name: Seed Database
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_DEV_TOKEN }}
+        run: |
+          cd backend
+          railway run go run cmd/seed/main.go
+
+      - name: Notify Success
+        if: success()
+        run: echo "✅ Dev environment deployed and seeded successfully!"
