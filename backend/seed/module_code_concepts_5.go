@@ -5,255 +5,152 @@ import "github.com/pathway/backend/models"
 func moduleCodeConcepts5() models.Module {
 	return models.Module{
 		ID:    "code-5",
-		Title: "Programming Languages 101 (C#, JavaScript, TypeScript, Go, Python)",
+		Title: "Common Mistakes Beginners Make",
 		Content: []models.ContentBlock{
-			textBlock(`## Programming Languages 101
+			textBlock(`## Everyone Makes Mistakes
 
-When people say "learn to code", what they really mean is:
+Programming is hard, and every programmer - even professionals with 20 years of experience - makes mistakes every day. The difference is knowing how to spot and fix them!
 
-- Learn to give instructions to a computer
-- Learn to organize those instructions so other people can understand them
-- Learn to debug when the computer does something unexpected
+Here are the most common mistakes beginners make, and how to avoid them.`),
+			calloutBlock("info", "Mistakes are how you learn! Don't get discouraged. Every bug you fix makes you a better programmer."),
+			textBlock(`## Mistake #1: Off-by-One Errors
 
-A programming language is just a set of rules for writing those instructions.
+This is the most common bug in programming. Arrays start at 0, not 1!
 
-You will see many languages in the real world. The good news: the big ideas transfer. If you learn the fundamentals once, switching languages becomes much easier.
+` + "```javascript\n" + `let colors = ["red", "green", "blue"];
 
-## Where does code run?
+// WRONG - This will give you undefined!
+console.log(colors[3]);  // undefined (there is no 4th item)
 
-- Front-end (in the browser): JavaScript and TypeScript are the main languages here.
-- Back-end (on a server): C#, Go, Python, and also JavaScript/TypeScript (Node.js) are common.
+// CORRECT - The last item is at position 2
+console.log(colors[2]);  // "blue"
 
-We teach multiple languages and concepts because real apps are built from multiple pieces that work together.
+// Better yet, use length - 1
+let lastIndex = colors.length - 1;
+console.log(colors[lastIndex]);  // "blue"
+` + "```" + `
+**How to avoid it:** Always remember: first item is [0], last item is [length - 1]`),
+			textBlock(`## Mistake #2: Using = Instead of ===
 
-## A quick tour (plain English)
+A single equals (=) assigns a value. Triple equals (===) compares values.
 
-### JavaScript
-- The language of the web browser
-- Great for building interactive websites
-- Very flexible, which is powerful but can cause confusing bugs for beginners
+` + "```javascript\n" + `let x = 5;
 
-### TypeScript
-- JavaScript with types (think: labels for data)
-- Helps catch mistakes earlier and makes code easier to read on teams
-
-### C#
-- Popular for back-end services, business apps, and games (Unity)
-- Strong tooling and a clear object-oriented style
-
-### Go
-- Designed for fast, reliable servers and services
-- Simple syntax, great performance, strong support for concurrency (doing many tasks at once)
-
-### Python
-- Very beginner-friendly syntax
-- Great for automation, scripting, and data work
-- Also used for back-end web services
-
-## Variables: mutable vs immutable (can it change?)
-
-A variable is a name that points to a value.
-
-- Mutable means you can change it after you create it.
-- Immutable means you cannot change it (you must create a new value instead).
-
-Here is what basic variable declarations look like in different languages.
-
-### TypeScript (mutable with let, immutable with const)`),
-			codeBlock("typescript", `let score = 10;        // mutable (can change)
-score = 11;
-
-const name = "Ava";    // immutable binding (cannot be reassigned)
-// name = "Sam";       // would be an error`),
-			textBlock(`### C# (mutable variables, immutable constants)`),
-			codeBlock("csharp", `int score = 10;         // mutable
-score = 11;
-
-const string name = "Ava"; // constant (cannot be reassigned)
-// name = "Sam";           // would be an error`),
-			textBlock(`### Go (var or :=, and const)`),
-			codeBlock("go", `score := 10     // mutable
-score = 11
-
-const name = "Ava" // constant`),
-			textBlock(`### Python (assignment binds a name; mutability depends on the type)`),
-			codeBlock("python", `score = 10
-score = 11  # reassignment is allowed
-
-name = "Ava"
-# name = "Sam"  # reassignment is allowed too (strings are immutable values)`),
-			calloutBlock("info", "In some languages, the variable itself is mutable/immutable. In others (like Python), the important idea is whether the underlying value (like a list) is mutable."),
-			textBlock(`## Value types vs reference types (copying behavior)
-
-This is one of the most important beginner concepts.
-
-When you assign one variable to another, are you copying:
-- the value itself (value type), or
-- a reference to the same object (reference type)?
-
-### C# example
-
-In C#, many basic types like int are value types. Classes are reference types.`),
-			codeBlock("csharp", `// Value type copy
-int a = 5;
-int b = a;   // b gets its own copy
-b = 10;
-// a is still 5
-
-// Reference type copy (class)
-class Person { public string Name { get; set; } }
-
-var p1 = new Person { Name = "Ava" };
-var p2 = p1;        // p2 points at the same object
-p2.Name = "Sam";
-// p1.Name is now "Sam"`),
-			textBlock(`### TypeScript / JavaScript example
-
-Primitives (number, string, boolean) behave like value copies. Objects/arrays behave like references.`),
-			codeBlock("typescript", `// Value-like (primitive)
-let a = 5;
-let b = a;
-b = 10;       // a is still 5
-
-// Reference-like (object)
-const p1 = { name: "Ava" };
-const p2 = p1;
-p2.name = "Sam"; // p1.name is now "Sam"`),
-			textBlock(`### Go example
-
-Go tends to copy values by default (including structs). Pointers give you reference-like behavior.`),
-			codeBlock("go", `type Person struct { Name string }
-
-// Struct assignment copies the value
-p1 := Person{Name: "Ava"}
-p2 := p1
-p2.Name = "Sam"
-// p1.Name is still "Ava"
-
-// Pointer gives reference-like behavior
-p3 := &p1
-p3.Name = "Lee"
-// p1.Name is now "Lee"`),
-			textBlock(`### Python example
-
-Python variables are names that refer to objects. Some objects are immutable (like ints), some are mutable (like lists).`),
-			codeBlock("python", `# Immutable example
-a = 5
-b = a
-b = 10
-# a is still 5
-
-# Mutable example (list)
-xs = [1, 2]
-ys = xs
-ys.append(3)
-# xs is now [1, 2, 3]`),
-			textBlock(`## What is a class?
-
-A class is a blueprint for creating objects.
-
-It usually contains:
-- data (fields/properties)
-- behavior (methods/functions)
-
-Here are tiny examples across languages.
-
-### C# class (short example)`),
-			codeBlock("csharp", `class Person {
-  public string Name { get; }
-
-  public Person(string name) {
-    Name = name;
-  }
-
-  public void SayHi() {
-    Console.WriteLine("Hi, I'm " + Name);
-  }
-}`),
-			textBlock(`### TypeScript class (short example)`),
-			codeBlock("typescript", `class Person {
-  name: string;
-
-  constructor(name: string) {
-    this.name = name;
-  }
-
-  sayHi(): void {
-    console.log("Hi, I'm " + this.name);
-  }
-}`),
-			textBlock(`### Python class (short example)`),
-			codeBlock("python", `class Person:
-    def __init__(self, name):
-        self.name = name
-
-    def say_hi(self):
-        print("Hi, I'm " + self.name)`),
-			textBlock(`### Go equivalent (struct + method)`),
-			codeBlock("go", `type Person struct { Name string }
-
-func (p Person) SayHi() {
-  fmt.Println("Hi, I'm " + p.Name)
-}`),
-			textBlock(`## Control flow (preview): if/else
-
-Control flow is how programs make decisions.
-
-Here is a very basic C# example:`),
-			codeBlock("csharp", `int age = 17;
-
-if (age >= 18) {
-  Console.WriteLine("Adult");
-} else {
-  Console.WriteLine("Minor");
-}`),
-			textBlock(`The same idea exists in every language:`),
-			codeBlock("text", `TypeScript:
-if (age >= 18) { ... } else { ... }
-
-Python:
-if age >= 18:
-    ...
-else:
-    ...
-
-Go:
-if age >= 18 {
-    ...
-} else {
-    ...
-}`),
-			calloutBlock("tip", "In the next module (Control Flow), we go deeper into if/else, switch, loops, and common beginner mistakes."),
-			textBlock(`## Functions and parameters (inputs to a function)
-
-A function is a named set of steps you can reuse.
-
-- A parameter is the name in the function definition (the input placeholder).
-- An argument is the real value you pass when you call the function.
-
-### C# example (function with a parameter)`),
-			codeBlock("csharp", `static int Double(int n) {
-  // n is a parameter
-  return n * 2;
+// WRONG - This assigns 10 to x, then checks if 10 is truthy
+if (x = 10) {
+    console.log("This always runs!");
 }
 
-int result = Double(21); // 21 is the argument
-// result is 42`),
-			textBlock(`### TypeScript example (same idea)`),
-			codeBlock("typescript", `function double(n: number): number {
-  return n * 2;
+// CORRECT - This actually compares
+if (x === 10) {
+    console.log("x is 10");
+} else {
+    console.log("x is not 10");  // This runs
+}
+` + "```" + `
+**How to avoid it:** Read your conditions out loud. \"If x equals 10\" should use ===.`),
+			textBlock(`## Mistake #3: Infinite Loops
+
+Forgetting to update your loop variable causes the loop to run forever!
+
+` + "```javascript\n" + `// WRONG - i never changes, so this runs forever!
+for (let i = 0; i < 5; i) {
+    console.log(i);
 }
 
-const result = double(21);`),
+// WRONG - Same problem with while loops
+let count = 0;
+while (count < 5) {
+    console.log(count);
+    // Oops! Forgot to increment count
+}
+
+// CORRECT
+for (let i = 0; i < 5; i++) {
+    console.log(i);
+}
+` + "```" + `
+**How to avoid it:** Always check that your loop variable will eventually make the condition false.`),
+			textBlock(`## Mistake #4: Scope Issues
+
+Variables created inside a function (or loop) can't be used outside of it.
+
+` + "```javascript\n" + `function calculate() {
+    let result = 42;
+    return result;
+}
+
+calculate();
+console.log(result);  // ERROR! result is not defined here
+
+// CORRECT - Capture the return value
+let answer = calculate();
+console.log(answer);  // 42
+` + "```" + `
+**How to avoid it:** Remember where you create your variables. If you need a value outside a function, return it and store it in a variable.`),
+			textBlock(`## Mistake #5: String vs Number Confusion
+
+JavaScript can be tricky with numbers that look like strings.
+
+` + "```javascript\n" + `let a = "5";
+let b = "3";
+
+// WRONG - This concatenates (joins) strings!
+console.log(a + b);  // "53" (not 8!)
+
+// CORRECT - Convert to numbers first
+console.log(Number(a) + Number(b));  // 8
+
+// Or make sure they're numbers from the start
+let c = 5;
+let d = 3;
+console.log(c + d);  // 8
+` + "```" + `
+**How to avoid it:** Be careful with user input - it's usually a string even if it looks like a number. Use Number() to convert.`),
+			calloutBlock("tip", "When something isn't working, use console.log() to print out your variables at different points. This helps you see exactly what's happening!"),
+			textBlock(`## Debugging Strategy: The Console is Your Friend
+
+When your code isn't working:
+
+1. **Read the error message carefully** - It usually tells you exactly what's wrong
+2. **Add console.log() statements** - Print your variables to see their values
+3. **Check one thing at a time** - Don't change 5 things at once
+4. **Take a break** - Sometimes walking away helps you see the problem
+5. **Explain it out loud** - Seriously! Explain your code to a rubber duck (or a friend). Hearing it out loud helps you spot errors.
+
+### Example: Debugging with console.log
+
+` + "```javascript\n" + `function calculateTotal(price, quantity) {
+    console.log("Price:", price);      // Check what price is
+    console.log("Quantity:", quantity); // Check what quantity is
+    
+    let total = price * quantity;
+    console.log("Total:", total);       // Check the result
+    
+    return total;
+}
+
+calculateTotal("10", 5);  // Oops! Price is a string!
+` + "```"),
 			exerciseBlock(
-				"1) In the C# if/else example above, what does it print when age is 17? 2) Write a function called Triple that takes a number and returns that number times 3.",
-				"1) It prints Minor. 2) One solution: static int Triple(int n) { return n * 3; } and then call Triple(10) to get 30.",
-				[]string{"If age is less than 18, the else branch runs", "A parameter is the name inside the parentheses; the argument is the value you pass in"},
-			),
-			exerciseBlock(
-				"Write down one reason a team might choose TypeScript over JavaScript for a large project.",
-				"TypeScript helps catch errors before runtime and makes code easier to understand by making data types explicit. This reduces bugs and improves teamwork in large codebases.",
-				[]string{"Think about teamwork and catching mistakes early", "Types are like labels that explain what a value is"},
+				"Find and fix the bug in this code:",
+				`function sumArray(numbers) {
+    let sum = 0;
+    for (let i = 0; i <= numbers.length; i++) {
+        sum += numbers[i];
+    }
+    return sum;
+}
+
+console.log(sumArray([1, 2, 3]));  // Should be 6, but gets undefined`,
+				`The bug is in the loop condition: i <= numbers.length should be i < numbers.length.
+
+When i equals numbers.length (which is 3), numbers[3] is undefined.
+undefined + number = NaN (Not a Number).
+
+Fixed version:
+for (let i = 0; i < numbers.length; i++) {`,
+				[]string{"Check the loop condition carefully", "What happens when i equals the array length?", "Remember: last valid index is length - 1"},
 			),
 		},
 	}

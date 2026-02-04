@@ -5,164 +5,101 @@ import "github.com/pathway/backend/models"
 func moduleCodeConcepts1() models.Module {
 	return models.Module{
 		ID:    "code-1",
-		Title: "Object Oriented Programming",
+		Title: "What is Code?",
 		Content: []models.ContentBlock{
-			textBlock(`## What is Object-Oriented Programming?
+			textBlock(`## Welcome to Programming!
 
-Object-Oriented Programming (OOP) is a programming paradigm based on the concept of "objects" that contain data and code.
+Programming is just giving instructions to a computer. Think of it like writing a recipe - you're telling the computer exactly what to do, step by step.
 
-### The Four Pillars of OOP
+### Why Learn to Code?
 
-1. **Encapsulation**: Bundling data + methods together to make things easier and safer to use
-2. **Inheritance**: Creating new classes based on existing ones
-3. **Polymorphism**: Different types sharing a common “plug” (interface) so they can be swapped
-4. **Abstraction**: Hiding complex implementation details behind a simple way to use something
+- **Create things**: Build websites, apps, games, and tools
+- **Solve problems**: Automate boring tasks, analyze data
+- **Express yourself**: Code is a creative medium, like art or music
+- **Career opportunities**: Programming skills are in high demand
 
----
+But before we can give instructions, we need to understand the basic building blocks.`),
+			calloutBlock("tip", "Don't worry if things don't make sense immediately. Programming is a skill you build over time, like learning to play an instrument."),
+			textBlock(`## Variables: Storing Information
 
-## 1) Encapsulation (the “capsule” idea)
+A **variable** is like a labeled box where you can store information. You can put something in the box, look at what's inside, or replace it with something else.
 
-Encapsulation means we **bundle**:
-- the **data** (variables / state)
-- and the **methods** that use that data (functions)
+Think of it like this:
+- A variable name is the label on the box (like "myAge")
+- The value is what's inside the box (like the number 16)
+- The data type is what kind of thing can go in the box (numbers, text, etc.)`),
+			codeBlock("javascript", `// Creating variables
+let myName = "Alex";
+let myAge = 16;
+let isStudent = true;
 
-…into one unit (a class), so it’s **easy to use** and harder to mess up by accident.
+// Using variables
+console.log(myName);     // Prints: Alex
+console.log(myAge);      // Prints: 16
 
-Think of it like a **medicine capsule**: you don’t need to know what’s inside or how it was made—you just take it the correct way.
+// Changing a variable
+myAge = 17;
+console.log(myAge);      // Prints: 17`),
+			textBlock(`## Data Types: Different Kinds of Information
 
-Encapsulation is useful because:
-- **It improves usability**: you get a simple “public” way to use something
-- **It improves safety**: the important internal data can be protected so you can’t accidentally break it
-- **It makes changes easier later**: you can change the inside without forcing everyone to change how they use it
+Computers need to know what kind of data they're working with. Here are the most common types:
 
-In many languages, we do this by choosing what’s **public** (anyone can use) and what’s **private** (only the class can touch). That way, you interact with objects through a safe set of methods instead of directly changing important values.
+### 1. Strings (Text)
+Strings are text - anything in quotes. Think of it like a message in a bottle.
 
----
+` + "```javascript\n" + `// Strings are always in quotes
+let firstName = "Maria";
+let favoriteFood = 'Pizza';
+let message = "Hello, World!";
 
-## 2) Inheritance (reusing what already exists)
+// You can combine strings
+let greeting = "Hi, " + firstName;  // "Hi, Maria"
+` + "```" + `
 
-Inheritance means you can create a **new class** that automatically gets the **properties and methods** from a **base class** (also called a parent class).
+### 2. Numbers
+Numbers can be whole numbers (integers) or decimals (floating point).
 
-This is awesome because it lets you reuse code instead of copy/pasting it.
+` + "```javascript\n" + `let age = 16;           // Integer (whole number)
+let price = 19.99;      // Float (decimal)
+let temperature = -5;   // Negative numbers work too
 
-### Quick example (C#)
+// Math operations
+let sum = 10 + 5;       // 15
+let product = 4 * 3;    // 12
+` + "```" + `
 
-Here’s a base class and a subclass. Notice how the subclass uses properties/methods from the base class **without re-writing them**:
+### 3. Booleans (True/False)
+Booleans are simple: they're either true or false. Like a light switch - it's either on or off.
 
-` + "```csharp\n" + `// Base class (parent)
-class Vehicle
-{
-    public string Brand { get; }
-    public int MaxSpeed { get; }
+` + "```javascript\n" + `let isLoggedIn = true;
+let hasPermission = false;
+let isRaining = true;
+` + "```" + `
 
-    public Vehicle(string brand, int maxSpeed)
-    {
-        Brand = brand;
-        MaxSpeed = maxSpeed;
-    }
+### 4. Arrays (Lists)
+An array is a list of items. Think of it like a shopping list or a row of lockers.
 
-    public void Honk()
-    {
-        Console.WriteLine(Brand + " says: Beep beep!");
-    }
-}
+` + "```javascript\n" + `let colors = ["red", "green", "blue"];
+let scores = [95, 87, 92, 88];
 
-// Subclass (child)
-class Car : Vehicle
-{
-    public int Doors { get; }
+// Access items by position (starts at 0!)
+console.log(colors[0]);  // "red"
+console.log(colors[2]);  // "blue"
+` + "```"),
+			calloutBlock("warning", "Arrays start counting at 0, not 1! The first item is at position 0, the second at position 1, etc. This is a common source of bugs for beginners."),
+			exerciseBlock(
+				"Create variables to store your name, age, and whether you like pizza (true/false). Then create an array of your three favorite movies. Print them all to the console.",
+				`let myName = "Your Name";
+let myAge = 16;
+let likesPizza = true;
+let favoriteMovies = ["Movie 1", "Movie 2", "Movie 3"];
 
-    public Car(string brand, int maxSpeed, int doors) : base(brand, maxSpeed)
-    {
-        Doors = doors;
-    }
-}
-
-// Using it
-var myCar = new Car("Toyota", 180, 4);
-Console.WriteLine(myCar.Brand);     // inherited from Vehicle
-Console.WriteLine(myCar.MaxSpeed);  // inherited from Vehicle
-myCar.Honk();                       // inherited method
-` + "```\n" + `
-
-### Vehicle analogy (easy mental model)
-
-Imagine a parent class called **Vehicle**. A bunch of things can be vehicles:
-- **Car**
-- **Truck**
-- **Bicycle**
-- **Moped**
-- **Segway**
-
-They all share some “vehicle stuff” like:
-- has a way to move
-- can have a max speed
-- might have a brand
-
-But each one can also have unique features:
-- a **Truck** might have ` + "`cargoCapacity`" + `
-- a **Bicycle** might have ` + "`numberOfGears`" + `
-- a **Car** might have ` + "`doors`" + `
-
-Inheritance helps us organize that shared stuff in one place.
-
----
-
-## 3) Polymorphism (same “plug”, different device)
-
-Polymorphism means different types can be used through the **same interface**, even if they’re different on the inside.
-
-### GPU / PCIe analogy
-
-Most graphics cards plug into a computer using **PCIe**. You don’t need a totally new computer design for every graphics card brand:
-- NVIDIA GPU
-- AMD GPU
-- (or a different model)
-
-They all use the same “slot” (interface), so you can **swap** them without rewriting the whole computer.
-
-In programming, an **interface** is like that PCIe slot:
-- the interface defines the “shape” of what’s allowed (what methods exist)
-- different classes can implement the same interface in their own way
-- your code can talk to the interface and doesn’t care which exact class is behind it
-
----
-
-## 4) Abstraction (use it without knowing every detail)
-
-Abstraction means you focus on **what something does**, not **how it does it** internally.
-
-### Coffee maker analogy
-
-If you use a coffee maker, you know the inputs:
-- water
-- coffee grounds
-- heat (electricity)
-
-And you know the output:
-- coffee
-
-But you don’t need to understand:
-- the exact temperature control system
-- the tubing layout
-- the internal timing logic
-
-You just press “brew” and it works.
-
-That’s abstraction in code:
-- you get a simple way to use something
-- the complicated details stay hidden
-
----
-
-### Why this matters
-
-These four ideas help you write code that is:
-- easier to understand
-- easier to reuse
-- easier to test
-- easier to change later (without breaking everything)`),
-			calloutBlock("info", "OOP helps manage complexity in large codebases by organizing code into reusable, modular components."),
+console.log(myName);
+console.log(myAge);
+console.log(likesPizza);
+console.log(favoriteMovies);`,
+				[]string{"Use let to create variables", "Remember to put strings in quotes", "Arrays go in square brackets []"},
+			),
 		},
 	}
 }

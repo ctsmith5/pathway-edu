@@ -5,29 +5,133 @@ import "github.com/pathway/backend/models"
 func moduleCodeConcepts4() models.Module {
 	return models.Module{
 		ID:    "code-4",
-		Title: "Functions & Closures",
+		Title: "Organizing Code with Functions",
 		Content: []models.ContentBlock{
-			textBlock(`## Understanding Functions and Closures
+			textBlock(`## What is a Function?
 
-Functions are reusable blocks of code. Closures are functions that capture and remember their surrounding context.
+A function is a reusable block of code that performs a specific task. Think of it like a recipe - you write it once, then you can use it whenever you need it.
 
-### What is a Closure?
+### Why Use Functions?
 
-A closure is a function that has access to variables from its outer (enclosing) scope, even after that outer function has returned.`),
-			codeBlock("javascript", `function createCounter() {
-  let count = 0;  // This variable is "captured" by the closure
-  
-  return function() {
-    count += 1;
-    return count;
-  };
+1. **Reusability**: Write once, use many times
+2. **Organization**: Break big problems into smaller pieces
+3. **Readability**: Give complex code a simple name
+4. **Testing**: Test small parts individually
+
+### Real-World Analogy
+A function is like a toaster:
+- **Input**: You put in bread (parameters/arguments)
+- **Process**: The toaster does its thing (function body)
+- **Output**: You get toast (return value)
+
+You don't need to know HOW the toaster works - you just use it!`),
+			textBlock(`## Creating a Function
+
+Here's the basic structure:
+
+` + "```javascript\n" + `function functionName(parameters) {
+    // Code to run
+    return value;  // Optional
+}
+` + "```" + `
+
+### Simple Example: Say Hello
+
+` + "```javascript\n" + `function sayHello() {
+    console.log("Hello there!");
 }
 
-const counter = createCounter();
-console.log(counter()); // 1
-console.log(counter()); // 2
-console.log(counter()); // 3`),
-			calloutBlock("info", "Closures are powerful for creating private state, callbacks, and functional patterns like currying."),
+// Using (calling) the function
+sayHello();  // Prints: Hello there!
+sayHello();  // Prints: Hello there!
+` + "```" + `
+
+We defined the function once, then used it twice!`),
+			textBlock(`## Functions with Parameters
+
+Parameters let you pass information INTO the function.
+
+` + "```javascript\n" + `function greet(name) {
+    console.log("Hello, " + name + "!");
+}
+
+greet("Alice");   // Hello, Alice!
+greet("Bob");     // Hello, Bob!
+greet("Charlie"); // Hello, Charlie!
+` + "```" + `
+
+You can have multiple parameters:
+
+` + "```javascript\n" + `function add(a, b) {
+    console.log(a + b);
+}
+
+add(3, 5);   // 8
+add(10, 20); // 30
+` + "```"),
+			textBlock(`## Functions that Return Values
+
+Sometimes you want the function to give you something back. Use the **return** keyword.
+
+` + "```javascript\n" + `function multiply(a, b) {
+    return a * b;
+}
+
+let result = multiply(4, 5);
+console.log(result);  // 20
+
+// You can use it directly too
+console.log(multiply(3, 7));  // 21
+` + "```" + `
+
+**Important:** Once a function hits 'return', it stops immediately and gives back the value.
+
+` + "```javascript\n" + `function checkAge(age) {
+    if (age >= 18) {
+        return "Adult";
+    }
+    return "Minor";  // This only runs if age < 18
+}
+
+console.log(checkAge(20));  // Adult
+console.log(checkAge(15));  // Minor
+` + "```"),
+			calloutBlock("tip", "Functions should do ONE thing well. If your function is doing many different things, break it into smaller functions!"),
+			textBlock(`## Putting It Together: A Real Example
+
+Let's calculate the area of a rectangle, but make it reusable:
+
+` + "```javascript\n" + `function calculateArea(width, height) {
+    return width * height;
+}
+
+function calculatePerimeter(width, height) {
+    return 2 * (width + height);
+}
+
+// Using our functions
+let roomWidth = 10;
+let roomHeight = 8;
+
+let area = calculateArea(roomWidth, roomHeight);
+let perimeter = calculatePerimeter(roomWidth, roomHeight);
+
+console.log("Room area: " + area + " square feet");
+console.log("Room perimeter: " + perimeter + " feet");
+` + "```" + `
+
+Now we can calculate area and perimeter for ANY rectangle without rewriting the math!`),
+			exerciseBlock(
+				"Write a function called 'isEven' that takes a number and returns true if it's even, false if it's odd. Then test it with the numbers 4, 7, and 10.",
+				`function isEven(number) {
+    return number % 2 === 0;
+}
+
+console.log(isEven(4));   // true
+console.log(isEven(7));   // false
+console.log(isEven(10));  // true`,
+				[]string{"Use the % operator (gives remainder)", "If number % 2 equals 0, it's even", "Return true or false"},
+			),
 		},
 	}
 }
