@@ -4204,93 +4204,632 @@ Deploy to Production`),
 			},
 		},
 		{
-			Title:       "Code Concepts",
-			Description: "Fundamental programming paradigms and concepts that every developer should master.",
+			Title:       "Coding Foundations",
+			Description: "Your first steps into programming! Learn the building blocks that every programmer uses, explained in plain English with lots of examples.",
 			Modules: []models.Module{
 				{
 					ID:    "code-1",
-					Title: "Object Oriented Programming",
+					Title: "What is Code?",
 					Content: []models.ContentBlock{
-						textBlock(`## What is Object-Oriented Programming?
+						textBlock(`## Welcome to Programming!
 
-Object-Oriented Programming (OOP) is a programming paradigm based on the concept of "objects" that contain data and code.
+Programming is just giving instructions to a computer. Think of it like writing a recipe - you're telling the computer exactly what to do, step by step.
 
-### The Four Pillars of OOP
+### Why Learn to Code?
 
-1. **Encapsulation**: Bundling data and methods that operate on that data
-2. **Inheritance**: Creating new classes based on existing ones
-3. **Polymorphism**: Objects of different types responding to the same interface
-4. **Abstraction**: Hiding complex implementation details`),
-						calloutBlock("info", "OOP helps manage complexity in large codebases by organizing code into reusable, modular components."),
+- **Create things**: Build websites, apps, games, and tools
+- **Solve problems**: Automate boring tasks, analyze data
+- **Express yourself**: Code is a creative medium, like art or music
+- **Career opportunities**: Programming skills are in high demand
+
+But before we can give instructions, we need to understand the basic building blocks.`),
+						calloutBlock("tip", "Don't worry if things don't make sense immediately. Programming is a skill you build over time, like learning to play an instrument."),
+						textBlock(`## Variables: Storing Information
+
+A **variable** is like a labeled box where you can store information. You can put something in the box, look at what's inside, or replace it with something else.
+
+Think of it like this:
+- A variable name is the label on the box (like "myAge")
+- The value is what's inside the box (like the number 16)
+- The data type is what kind of thing can go in the box (numbers, text, etc.)`),
+						codeBlock("javascript", `// Creating variables
+let myName = "Alex";
+let myAge = 16;
+let isStudent = true;
+
+// Using variables
+console.log(myName);     // Prints: Alex
+console.log(myAge);      // Prints: 16
+
+// Changing a variable
+myAge = 17;
+console.log(myAge);      // Prints: 17`),
+						textBlock(`## Data Types: Different Kinds of Information
+
+Computers need to know what kind of data they're working with. Here are the most common types:
+
+### 1. Strings (Text)
+Strings are text - anything in quotes. Think of it like a message in a bottle.
+
+` + "```javascript\n" + `// Strings are always in quotes
+let firstName = "Maria";
+let favoriteFood = 'Pizza';
+let message = "Hello, World!";
+
+// You can combine strings
+let greeting = "Hi, " + firstName;  // "Hi, Maria"
+` + "```" + `
+
+### 2. Numbers
+Numbers can be whole numbers (integers) or decimals (floating point).
+
+` + "```javascript\n" + `let age = 16;           // Integer (whole number)
+let price = 19.99;      // Float (decimal)
+let temperature = -5;   // Negative numbers work too
+
+// Math operations
+let sum = 10 + 5;       // 15
+let product = 4 * 3;    // 12
+` + "```" + `
+
+### 3. Booleans (True/False)
+Booleans are simple: they're either true or false. Like a light switch - it's either on or off.
+
+` + "```javascript\n" + `let isLoggedIn = true;
+let hasPermission = false;
+let isRaining = true;
+` + "```" + `
+
+### 4. Arrays (Lists)
+An array is a list of items. Think of it like a shopping list or a row of lockers.
+
+` + "```javascript\n" + `let colors = ["red", "green", "blue"];
+let scores = [95, 87, 92, 88];
+
+// Access items by position (starts at 0!)
+console.log(colors[0]);  // "red"
+console.log(colors[2]);  // "blue"
+` + "```"),
+						calloutBlock("warning", "Arrays start counting at 0, not 1! The first item is at position 0, the second at position 1, etc. This is a common source of bugs for beginners."),
+						exerciseBlock(
+							"Create variables to store your name, age, and whether you like pizza (true/false). Then create an array of your three favorite movies. Print them all to the console.",
+							`let myName = "Your Name";
+let myAge = 16;
+let likesPizza = true;
+let favoriteMovies = ["Movie 1", "Movie 2", "Movie 3"];
+
+console.log(myName);
+console.log(myAge);
+console.log(likesPizza);
+console.log(favoriteMovies);`,
+							[]string{"Use let to create variables", "Remember to put strings in quotes", "Arrays go in square brackets []"},
+						),
 					},
 				},
 				{
 					ID:    "code-2",
-					Title: "Functional Programming",
+					Title: "Making Decisions",
 					Content: []models.ContentBlock{
-						textBlock(`## What is Functional Programming?
+						textBlock(`## Programs Need to Make Choices
 
-Functional Programming (FP) is a paradigm that treats computation as the evaluation of mathematical functions, avoiding changing state and mutable data.
+Real life is full of decisions: "If it's raining, take an umbrella." Programs work the same way! They check conditions and decide what to do.
 
-### Key Concepts
+### Comparison Operators
 
-- **Pure Functions**: Same input always produces same output, no side effects
-- **Immutability**: Data cannot be changed after creation
-- **First-Class Functions**: Functions can be passed as arguments and returned from other functions
-- **Higher-Order Functions**: Functions that operate on other functions`),
-						codeBlock("javascript", `// Pure function example
-const add = (a, b) => a + b;
+Before we can make decisions, we need to compare things. These operators let us do that:
 
-// Higher-order function
-const map = (arr, fn) => arr.map(fn);
+| Operator | Meaning | Example | Result |
+|----------|---------|---------|--------|
+| == | Equal to | 5 == 5 | true |
+| != | Not equal to | 5 != 3 | true |
+| > | Greater than | 7 > 3 | true |
+| < | Less than | 2 < 5 | true |
+| >= | Greater than or equal | 5 >= 5 | true |
+| <= | Less than or equal | 3 <= 5 | true |
 
-// Immutability - create new array instead of modifying
-const numbers = [1, 2, 3];
-const doubled = numbers.map(n => n * 2); // [2, 4, 6]`),
+` + "```javascript\n" + `let age = 16;
+let hasLicense = true;
+
+console.log(age == 16);        // true
+console.log(age > 18);         // false
+console.log(hasLicense == true); // true
+` + "```"),
+						calloutBlock("tip", "Use === (triple equals) instead of == when possible. It checks both value AND type. 5 === \"5\" is false, but 5 == \"5\" is true. This prevents weird bugs!"),
+						textBlock(`## If Statements: The Basic Decision
+
+An if statement checks a condition and runs code only if that condition is true.
+
+### Real-World Analogy
+Think of an if statement like a bouncer at a club:
+- Check ID (condition)
+- If age >= 18, let them in (run code)
+- Otherwise, don't let them in (skip code)
+
+` + "```javascript\n" + `let age = 16;
+
+if (age >= 18) {
+    console.log("You can vote!");
+}
+
+if (age < 18) {
+    console.log("You cannot vote yet.");
+}
+` + "```"),
+						textBlock(`## If-Else: Either This or That
+
+What if you want to do one thing OR another? Use if-else!
+
+` + "```javascript\n" + `let temperature = 75;
+
+if (temperature > 80) {
+    console.log("It's hot! Wear shorts.");
+} else {
+    console.log("It's not too hot. Pants are fine.");
+}
+` + "```"),
+						textBlock(`## If-Else If-Else: Multiple Choices
+
+Sometimes you have more than two options. You can chain conditions together.
+
+` + "```javascript\n" + `let score = 85;
+
+if (score >= 90) {
+    console.log("Grade: A");
+} else if (score >= 80) {
+    console.log("Grade: B");
+} else if (score >= 70) {
+    console.log("Grade: C");
+} else if (score >= 60) {
+    console.log("Grade: D");
+} else {
+    console.log("Grade: F");
+}
+` + "```"),
+						calloutBlock("info", "Only ONE block will run! Once a condition is true, JavaScript stops checking. In the example above, a score of 85 prints \"Grade: B\" and skips the rest."),
+						textBlock(`## Logical Operators: Combining Conditions
+
+Sometimes you need to check multiple things at once.
+
+### && (AND) - Both must be true
+Like saying "You can drive if you have a license AND you're not tired."
+
+### || (OR) - At least one must be true
+Like saying "You can enter if you're a member OR you have a ticket."
+
+### ! (NOT) - Flips the value
+Like saying "If it's NOT raining, we'll have the picnic."
+
+` + "```javascript\n" + `let hasTicket = true;
+let isVIP = false;
+let age = 20;
+
+// AND example
+if (hasTicket && age >= 18) {
+    console.log("You can enter the concert!");
+}
+
+// OR example  
+if (hasTicket || isVIP) {
+    console.log("Welcome!");
+}
+
+// NOT example
+let isRaining = true;
+if (!isRaining) {
+    console.log("Let's go outside!");
+}
+` + "```"),
+						exerciseBlock(
+							"Write a program that checks if someone can ride a roller coaster. They need to be at least 48 inches tall AND either have a ticket OR be a season pass holder.",
+							`let height = 50;
+let hasTicket = false;
+let hasSeasonPass = true;
+
+if (height >= 48 && (hasTicket || hasSeasonPass)) {
+    console.log("You can ride!");
+} else {
+    console.log("Sorry, you cannot ride.");
+}`,
+							[]string{"Check height first", "Use || for the ticket/pass condition", "Use && to combine them"},
+						),
 					},
 				},
 				{
 					ID:    "code-3",
-					Title: "Protocol Oriented Programming",
+					Title: "Repeating Actions",
 					Content: []models.ContentBlock{
-						textBlock(`## Protocol-Oriented Programming
+						textBlock(`## Computers Love Repetition
 
-Protocol-Oriented Programming (POP) emphasizes defining behavior through protocols (interfaces) rather than through class inheritance.
+One of the biggest advantages of computers is that they never get bored doing the same thing over and over. This is where loops come in!
 
-### Why Protocol-Oriented?
+### Why Use Loops?
 
-- More flexible than class inheritance
-- Allows composition over inheritance
-- Better suited for value types
-- Enables retroactive modeling`),
-						calloutBlock("tip", "Swift popularized this paradigm, but the concepts apply to any language with interfaces or protocols."),
+Imagine you need to print "Hello!" 100 times. You could write:
+` + "```javascript\n" + `console.log("Hello!");
+console.log("Hello!");
+console.log("Hello!");
+// ... 97 more times ...
+` + "```" + `
+
+Or you could write a loop that does it for you in 3 lines!`),
+						textBlock(`## For Loops: Counting Repetition
+
+A for loop is perfect when you know exactly how many times you want to repeat something.
+
+### The Anatomy of a For Loop
+
+` + "```javascript\n" + `for (let i = 0; i < 5; i++) {
+    console.log("Iteration: " + i);
+}
+` + "```" + `
+
+Let's break this down:
+1. **let i = 0** - Start with i equal to 0 (initialization)
+2. **i < 5** - Keep going while i is less than 5 (condition)
+3. **i++** - Add 1 to i after each loop (increment)
+4. **{ ... }** - The code that runs each time
+
+**Output:**
+` + "```\n" + `Iteration: 0
+Iteration: 1
+Iteration: 2
+Iteration: 3
+Iteration: 4
+` + "```"),
+						calloutBlock("info", "The variable 'i' is just a convention. It stands for 'index' or 'iterator'. You can use any name you want, like 'count' or 'step'."),
+						textBlock(`## Looping Through Arrays
+
+Loops are super useful for working with arrays (lists of items).
+
+` + "```javascript\n" + `let fruits = ["apple", "banana", "cherry", "date"];
+
+// Print each fruit
+for (let i = 0; i < fruits.length; i++) {
+    console.log(fruits[i]);
+}
+
+// Output:
+// apple
+// banana
+// cherry
+// date
+` + "```" + `
+
+**What's happening:**
+- `fruits.length` gives us 4 (there are 4 items)
+- `fruits[i]` gets the item at position i
+- We go from i=0 to i=3 (all 4 items)`),
+						textBlock(`## While Loops: Conditional Repetition
+
+A while loop keeps going as long as a condition is true. Use this when you DON'T know how many times you need to repeat.
+
+### Real-World Analogy
+"While the light is red, wait." You don't know how many seconds - you just keep checking.
+
+` + "```javascript\n" + `let count = 0;
+
+while (count < 5) {
+    console.log("Count is: " + count);
+    count++;
+}
+` + "```" + `
+
+**Important:** You MUST change something inside the loop, or it will run forever! In the example above, we increment count each time.`),
+						calloutBlock("warning", "An infinite loop happens when the condition never becomes false. This will crash your program! Always make sure the loop will eventually end."),
+						textBlock(`## Practical Example: Finding Something
+
+Let's say we have a list of students and we want to find if "Alice" is in it:
+
+` + "```javascript\n" + `let students = ["Bob", "Alice", "Charlie", "Diana"];
+let found = false;
+
+for (let i = 0; i < students.length; i++) {
+    if (students[i] === "Alice") {
+        found = true;
+        console.log("Found Alice at position " + i);
+        break;  // Exit the loop early!
+    }
+}
+
+if (!found) {
+    console.log("Alice is not in the list.");
+}
+` + "```" + `
+
+**The 'break' statement** immediately exits the loop. We use it here because once we found Alice, we don't need to keep looking!`),
+						exerciseBlock(
+							"Write a loop that calculates the sum of all numbers from 1 to 100. Hint: Create a variable to keep track of the total, then add each number to it in the loop.",
+							`let total = 0;
+
+for (let i = 1; i <= 100; i++) {
+    total = total + i;
+}
+
+console.log("The sum is: " + total);  // Should be 5050`,
+							[]string{"Start total at 0", "Loop from 1 to 100", "Add i to total each time"},
+						),
 					},
 				},
 				{
 					ID:    "code-4",
-					Title: "Functions & Closures",
+					Title: "Organizing Code with Functions",
 					Content: []models.ContentBlock{
-						textBlock(`## Understanding Functions and Closures
+						textBlock(`## What is a Function?
 
-Functions are reusable blocks of code. Closures are functions that capture and remember their surrounding context.
+A function is a reusable block of code that performs a specific task. Think of it like a recipe - you write it once, then you can use it whenever you need it.
 
-### What is a Closure?
+### Why Use Functions?
 
-A closure is a function that has access to variables from its outer (enclosing) scope, even after that outer function has returned.`),
-						codeBlock("javascript", `function createCounter() {
-  let count = 0;  // This variable is "captured" by the closure
-  
-  return function() {
-    count += 1;
-    return count;
-  };
+1. **Reusability**: Write once, use many times
+2. **Organization**: Break big problems into smaller pieces
+3. **Readability**: Give complex code a simple name
+4. **Testing**: Test small parts individually
+
+### Real-World Analogy
+A function is like a toaster:
+- **Input**: You put in bread (parameters/arguments)
+- **Process**: The toaster does its thing (function body)
+- **Output**: You get toast (return value)
+
+You don't need to know HOW the toaster works - you just use it!`),
+						textBlock(`## Creating a Function
+
+Here's the basic structure:
+
+` + "```javascript\n" + `function functionName(parameters) {
+    // Code to run
+    return value;  // Optional
+}
+` + "```" + `
+
+### Simple Example: Say Hello
+
+` + "```javascript\n" + `function sayHello() {
+    console.log("Hello there!");
 }
 
-const counter = createCounter();
-console.log(counter()); // 1
-console.log(counter()); // 2
-console.log(counter()); // 3`),
-						calloutBlock("info", "Closures are powerful for creating private state, callbacks, and functional patterns like currying."),
+// Using (calling) the function
+sayHello();  // Prints: Hello there!
+sayHello();  // Prints: Hello there!
+` + "```" + `
+
+We defined the function once, then used it twice!`),
+						textBlock(`## Functions with Parameters
+
+Parameters let you pass information INTO the function.
+
+` + "```javascript\n" + `function greet(name) {
+    console.log("Hello, " + name + "!");
+}
+
+greet("Alice");   // Hello, Alice!
+greet("Bob");     // Hello, Bob!
+greet("Charlie"); // Hello, Charlie!
+` + "```" + `
+
+You can have multiple parameters:
+
+` + "```javascript\n" + `function add(a, b) {
+    console.log(a + b);
+}
+
+add(3, 5);   // 8
+add(10, 20); // 30
+` + "```"),
+						textBlock(`## Functions that Return Values
+
+Sometimes you want the function to give you something back. Use the **return** keyword.
+
+` + "```javascript\n" + `function multiply(a, b) {
+    return a * b;
+}
+
+let result = multiply(4, 5);
+console.log(result);  // 20
+
+// You can use it directly too
+console.log(multiply(3, 7));  // 21
+` + "```" + `
+
+**Important:** Once a function hits 'return', it stops immediately and gives back the value.
+
+` + "```javascript\n" + `function checkAge(age) {
+    if (age >= 18) {
+        return "Adult";
+    }
+    return "Minor";  // This only runs if age < 18
+}
+
+console.log(checkAge(20));  // Adult
+console.log(checkAge(15));  // Minor
+` + "```"),
+						calloutBlock("tip", "Functions should do ONE thing well. If your function is doing many different things, break it into smaller functions!"),
+						textBlock(`## Putting It Together: A Real Example
+
+Let's calculate the area of a rectangle, but make it reusable:
+
+` + "```javascript\n" + `function calculateArea(width, height) {
+    return width * height;
+}
+
+function calculatePerimeter(width, height) {
+    return 2 * (width + height);
+}
+
+// Using our functions
+let roomWidth = 10;
+let roomHeight = 8;
+
+let area = calculateArea(roomWidth, roomHeight);
+let perimeter = calculatePerimeter(roomWidth, roomHeight);
+
+console.log("Room area: " + area + " square feet");
+console.log("Room perimeter: " + perimeter + " feet");
+` + "```" + `
+
+Now we can calculate area and perimeter for ANY rectangle without rewriting the math!`),
+						exerciseBlock(
+							"Write a function called 'isEven' that takes a number and returns true if it's even, false if it's odd. Then test it with the numbers 4, 7, and 10.",
+							`function isEven(number) {
+    return number % 2 === 0;
+}
+
+console.log(isEven(4));   // true
+console.log(isEven(7));   // false
+console.log(isEven(10));  // true`,
+							[]string{"Use the % operator (gives remainder)", "If number % 2 equals 0, it's even", "Return true or false"},
+						),
+					},
+				},
+				{
+					ID:    "code-5",
+					Title: "Common Mistakes Beginners Make",
+					Content: []models.ContentBlock{
+						textBlock(`## Everyone Makes Mistakes
+
+Programming is hard, and every programmer - even professionals with 20 years of experience - makes mistakes every day. The difference is knowing how to spot and fix them!
+
+Here are the most common mistakes beginners make, and how to avoid them.`),
+						calloutBlock("info", "Mistakes are how you learn! Don't get discouraged. Every bug you fix makes you a better programmer."),
+						textBlock(`## Mistake #1: Off-by-One Errors
+
+This is the most common bug in programming. Arrays start at 0, not 1!
+
+` + "```javascript\n" + `let colors = ["red", "green", "blue"];
+
+// WRONG - This will give you undefined!
+console.log(colors[3]);  // undefined (there is no 4th item)
+
+// CORRECT - The last item is at position 2
+console.log(colors[2]);  // "blue"
+
+// Better yet, use length - 1
+let lastIndex = colors.length - 1;
+console.log(colors[lastIndex]);  // "blue"
+` + "```" + `
+**How to avoid it:** Always remember: first item is [0], last item is [length - 1]`),
+						textBlock(`## Mistake #2: Using = Instead of ===
+
+A single equals (=) assigns a value. Triple equals (===) compares values.
+
+` + "```javascript\n" + `let x = 5;
+
+// WRONG - This assigns 10 to x, then checks if 10 is truthy
+if (x = 10) {
+    console.log("This always runs!");
+}
+
+// CORRECT - This actually compares
+if (x === 10) {
+    console.log("x is 10");
+} else {
+    console.log("x is not 10");  // This runs
+}
+` + "```" + `
+**How to avoid it:** Read your conditions out loud. \"If x equals 10\" should use ===.`),
+						textBlock(`## Mistake #3: Infinite Loops
+
+Forgetting to update your loop variable causes the loop to run forever!
+
+` + "```javascript\n" + `// WRONG - i never changes, so this runs forever!
+for (let i = 0; i < 5; i) {
+    console.log(i);
+}
+
+// WRONG - Same problem with while loops
+let count = 0;
+while (count < 5) {
+    console.log(count);
+    // Oops! Forgot to increment count
+}
+
+// CORRECT
+for (let i = 0; i < 5; i++) {
+    console.log(i);
+}
+` + "```" + `
+**How to avoid it:** Always check that your loop variable will eventually make the condition false.`),
+						textBlock(`## Mistake #4: Scope Issues
+
+Variables created inside a function (or loop) can't be used outside of it.
+
+` + "```javascript\n" + `function calculate() {
+    let result = 42;
+    return result;
+}
+
+calculate();
+console.log(result);  // ERROR! result is not defined here
+
+// CORRECT - Capture the return value
+let answer = calculate();
+console.log(answer);  // 42
+` + "```" + `
+**How to avoid it:** Remember where you create your variables. If you need a value outside a function, return it and store it in a variable.`),
+						textBlock(`## Mistake #5: String vs Number Confusion
+
+JavaScript can be tricky with numbers that look like strings.
+
+` + "```javascript\n" + `let a = "5";
+let b = "3";
+
+// WRONG - This concatenates (joins) strings!
+console.log(a + b);  // "53" (not 8!)
+
+// CORRECT - Convert to numbers first
+console.log(Number(a) + Number(b));  // 8
+
+// Or make sure they're numbers from the start
+let c = 5;
+let d = 3;
+console.log(c + d);  // 8
+` + "```" + `
+**How to avoid it:** Be careful with user input - it's usually a string even if it looks like a number. Use Number() to convert.`),
+						calloutBlock("tip", "When something isn't working, use console.log() to print out your variables at different points. This helps you see exactly what's happening!"),
+						textBlock(`## Debugging Strategy: The Console is Your Friend
+
+When your code isn't working:
+
+1. **Read the error message carefully** - It usually tells you exactly what's wrong
+2. **Add console.log() statements** - Print your variables to see their values
+3. **Check one thing at a time** - Don't change 5 things at once
+4. **Take a break** - Sometimes walking away helps you see the problem
+5. **Explain it out loud** - Seriously! Explain your code to a rubber duck (or a friend). Hearing it out loud helps you spot errors.
+
+### Example: Debugging with console.log
+
+` + "```javascript\n" + `function calculateTotal(price, quantity) {
+    console.log("Price:", price);      // Check what price is
+    console.log("Quantity:", quantity); // Check what quantity is
+    
+    let total = price * quantity;
+    console.log("Total:", total);       // Check the result
+    
+    return total;
+}
+
+calculateTotal("10", 5);  // Oops! Price is a string!
+` + "```"),
+						exerciseBlock(
+							"Find and fix the bug in this code:",
+							`function sumArray(numbers) {
+    let sum = 0;
+    for (let i = 0; i <= numbers.length; i++) {
+        sum += numbers[i];
+    }
+    return sum;
+}
+
+console.log(sumArray([1, 2, 3]));  // Should be 6, but gets undefined`,
+							`The bug is in the loop condition: i <= numbers.length should be i < numbers.length.
+
+When i equals numbers.length (which is 3), numbers[3] is undefined.
+undefined + number = NaN (Not a Number).
+
+Fixed version:
+for (let i = 0; i < numbers.length; i++) {`,
+							[]string{"Check the loop condition carefully", "What happens when i equals the array length?", "Remember: last valid index is length - 1"},
+						),
 					},
 				},
 			},
