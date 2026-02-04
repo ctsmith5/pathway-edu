@@ -66,6 +66,8 @@ export const AuthProvider = ({ children }) => {
   };
 
   const register = async (name, email, password) => {
+    console.log('API_URL:', API_URL);
+    console.log('VITE_API_URL:', import.meta.env.VITE_API_URL);
     const response = await fetch(`${API_URL}/auth/register`, {
       method: 'POST',
       headers: {
