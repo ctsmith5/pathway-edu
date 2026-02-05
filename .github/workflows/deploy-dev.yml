@@ -12,34 +12,28 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Deploy to Railway
+        uses: bervProject/railway-deploy@main
+        with:
+          railway_token: ${{ secrets.RAILWAY_DEV_TOKEN }}
+          service: "${{ secrets.RAILWAY_DEV_SERVICE_ID }}"
+          environment: "production"
+
       - name: Setup Go
         uses: actions/setup-go@v5
         with:
           go-version: '1.21'
 
-      - name: Deploy to Railway
-        uses: railwayapp/railway-github-action@v1
-        with:
-          railway_token: ${{ secrets.RAILWAY_DEV_TOKEN }}
-          project_id: ${{ secrets.RAILWAY_DEV_PROJECT_ID }}
-          service_id: ${{ secrets.RAILWAY_DEV_SERVICE_ID }}
-          environment: production
-          working_directory: backend
+      - name: Install Railway CLI
+        run: npm install -g @railway/cli
 
       - name: Seed Database
-        uses: railwayapp/railway-github-action@v1
-        with:
-          railway_token: ${{ secrets.RAILWAY_DEV_TOKEN }}
-          project_id: ${{ secrets.RAILWAY_DEV_PROJECT_ID }}
-          service_id: ${{ secrets.RAILWAY_DEV_SERVICE_ID }}
-          environment: production
-          working_directory: backend
-          command: go run cmd/seed/main.go
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_DEV_TOKEN }}
+        run: |
+          cd backend
+          railway run --service ${{ secrets.RAILWAY_DEV_SERVICE_ID }} go run cmd/seed/main.go
 
       - name: Notify Success
         if: success()
         run: echo "✅ Dev environment deployed and seeded successfully!"
-
-      - name: Show deployment status
-        if: always()
-        run: echo "Workflow completed - check Railway dashboard for deployment status"
