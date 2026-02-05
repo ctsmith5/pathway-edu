@@ -133,23 +133,22 @@ When your code isn't working:
 calculateTotal("10", 5);  // Oops! Price is a string!
 ` + "```"),
 			exerciseBlock(
-				"Find and fix the bug in this code:",
-				`function sumArray(numbers) {
-    let sum = 0;
-    for (let i = 0; i <= numbers.length; i++) {
-        sum += numbers[i];
-    }
-    return sum;
-}
-
-console.log(sumArray([1, 2, 3]));  // Should be 6, but gets undefined`,
-				`The bug is in the loop condition: i <= numbers.length should be i < numbers.length.
-
-When i equals numbers.length (which is 3), numbers[3] is undefined.
-undefined + number = NaN (Not a Number).
-
-Fixed version:
-for (let i = 0; i < numbers.length; i++) {`,
+				"Find and fix the bug in this code:\n\n"+
+				"```javascript\n"+
+				"function sumArray(numbers) {\n"+
+				"    let sum = 0;\n"+
+				"    for (let i = 0; i <= numbers.length; i++) {\n"+
+				"        sum += numbers[i];\n"+
+				"    }\n"+
+				"    return sum;\n"+
+				"}\n\n"+
+				"console.log(sumArray([1, 2, 3]));  // Should be 6, but gets undefined\n"+
+				"```",
+				"The bug is in the loop condition: i <= numbers.length should be i < numbers.length.\n\n"+
+				"When i equals numbers.length (which is 3), numbers[3] is undefined.\n"+
+				"undefined + number = NaN (Not a Number).\n\n"+
+				"Fixed version:\n"+
+				"for (let i = 0; i < numbers.length; i++) {",
 				[]string{"Check the loop condition carefully", "What happens when i equals the array length?", "Remember: last valid index is length - 1"},
 			),
 		},
