@@ -38,3 +38,7 @@ jobs:
       - name: Notify Success
         if: success()
         run: echo "✅ Dev environment deployed and seeded successfully!"
+
+      - name: Show deployment status
+        if: always()
+        run: echo "Workflow completed - check Railway dashboard for deployment status"
