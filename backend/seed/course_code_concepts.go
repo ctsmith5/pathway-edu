@@ -12,6 +12,7 @@ func courseCodeConcepts() models.Course {
 			moduleCodeConcepts3(),
 			moduleCodeConcepts4(),
 			moduleCodeConcepts5(),
+			moduleCodeConcepts6(),
 		},
 	}
 }
