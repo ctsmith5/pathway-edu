@@ -30,9 +30,11 @@ let lastIndex = colors.length - 1;
 console.log(colors[lastIndex]);  // "blue"
 ` + "```" + `
 **How to avoid it:** Always remember: first item is [0], last item is [length - 1]`),
-			textBlock(`## Mistake #2: Using = Instead of ===
+			textBlock(`## Mistake #2: Using = Instead of == or ===
 
-A single equals (=) assigns a value. Triple equals (===) compares values.
+- A single equals (=) assigns a value
+- Double equals (==) compares values (allows type conversion)
+- Triple equals (===) compares values AND types strictly
 
 ` + "```javascript\n" + `let x = 5;
 
@@ -41,14 +43,18 @@ if (x = 10) {
     console.log("This always runs!");
 }
 
-// CORRECT - This actually compares
-if (x === 10) {
-    console.log("x is 10");
+// CORRECT - Use == or === to compare
+if (x == 10) {
+    console.log("x equals 10");
 } else {
     console.log("x is not 10");  // This runs
 }
+
+// STRICT COMPARISON - Checks value AND type
+console.log(5 == "5");   // true (converts string to number)
+console.log(5 === "5");  // false (different types!)
 ` + "```" + `
-**How to avoid it:** Read your conditions out loud. \"If x equals 10\" should use ===.`),
+**How to avoid it:** Read your conditions out loud. \"If x equals 10\" should use == or ===. When in doubt, use === for strict comparison.`),
 			textBlock(`## Mistake #3: Infinite Loops
 
 Forgetting to update your loop variable causes the loop to run forever!
