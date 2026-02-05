@@ -1,0 +1,24 @@
+name: Seed Database After Deploy
+
+on:
+  push:
+    branches:
+      - development
+
+jobs:
+  seed:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait for deployment
+        run: sleep 30
+
+      - name: Seed Database
+        run: |
+          curl -X POST https://pathway-edu-dev-production.up.railway.app/api/admin/seed \
+            -H "X-Admin-Seed-Token: ${{ secrets.ADMIN_SEED_TOKEN }}" \
+            -H "Content-Type: application/json"
+
+      - name: Verify seed
+        run: |
+          sleep 5
+          curl https://pathway-edu-dev-production.up.railway.app/api/courses | head -c 500
