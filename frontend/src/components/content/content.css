@@ -374,6 +374,54 @@
   font-size: 0.9rem;
 }
 
+/* Multi-Code Block */
+.multi-code-block {
+  border-radius: 8px;
+  overflow: hidden;
+  background: #1e1e1e;
+  margin: 1rem 0;
+}
+
+.multi-code-block__tabs {
+  display: flex;
+  background: #2d2d2d;
+  border-bottom: 1px solid #404040;
+  padding: 0 0.5rem;
+}
+
+.multi-code-block__tab {
+  background: transparent;
+  border: none;
+  color: #888;
+  padding: 0.75rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+}
+
+.multi-code-block__tab:hover {
+  color: #ccc;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.multi-code-block__tab--active {
+  color: #fff;
+  border-bottom-color: var(--accent-primary, #3b82f6);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.multi-code-block__content {
+  overflow: hidden;
+}
+
+.multi-code-block__content pre {
+  margin: 0 !important;
+  border-radius: 0 !important;
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .content-renderer {
@@ -396,6 +444,15 @@
   .exercise-block__btn {
     width: 100%;
     text-align: center;
+  }
+
+  .multi-code-block__tabs {
+    flex-wrap: wrap;
+  }
+
+  .multi-code-block__tab {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8rem;
   }
 }
 

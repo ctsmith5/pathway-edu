@@ -1,6 +1,7 @@
 export { default as ContentRenderer } from './ContentRenderer';
 export { default as TextBlock } from './TextBlock';
 export { default as CodeBlock } from './CodeBlock';
+export { default as MultiCodeBlock } from './MultiCodeBlock';
 export { default as ImageBlock } from './ImageBlock';
 export { default as CalloutBlock } from './CalloutBlock';
 export { default as ExerciseBlock } from './ExerciseBlock';
