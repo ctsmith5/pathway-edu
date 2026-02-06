@@ -68,7 +68,7 @@ A <code>for</code> loop is the most common way to repeat code a specific number 
 3. **Increment** — update the counter after each iteration
 
 Here's the anatomy of a for loop:`),
-			imageBlock("https://storage.googleapis.com/ludicrousapps-c1ea7.firebasestorage.app/PathwayEdu/1f442d36-7bb3-43fc-b578-3e3d225890fa.png", "Diagram showing the anatomy of a JavaScript for loop with labeled parts for initialization, condition, and increment", "The three parts of a for loop: initialization (let i = 1), condition (i <= 5), and increment (i++)"),
+			imageBlock("https://storage.googleapis.com/ludicrousapps-c1ea7.firebasestorage.app/PathwayEdu/b0aca6cb-3c5c-4b30-837b-72dbc70a84a8(1).jpeg", "Diagram showing the anatomy of a JavaScript for loop with labeled parts for initialization, condition, and increment", "The three parts of a for loop: initialization (let i = 1), condition (i <= 5), and increment (i++)"),
 			textBlock(`The loop above runs 5 times, with <code>i</code> taking values 1, 2, 3, 4, and 5. After the 5th iteration, <code>i</code> becomes 6, the condition <code>i <= 5</code> is no longer true, and the loop exits.
 
 Here's the same loop in action:`),
