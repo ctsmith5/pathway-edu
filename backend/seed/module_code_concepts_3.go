@@ -20,8 +20,9 @@ func moduleCodeConcepts3() models.Module {
 				"for (let i = 0; i < 5; i++) {\n" +
 				"    console.log(\"Iteration: \" + i);\n" +
 				"}\n" +
-				"```\n\n" +
-				"Let's break this down:\n" +
+				"```"),
+			imageBlock("https://storage.googleapis.com/ludicrousapps-c1ea7.firebasestorage.app/PathwayEdu/1f442d36-7bb3-43fc-b578-3e3d225890fa.png", "Diagram showing the anatomy of a JavaScript for loop with labeled parts for initialization, condition, and increment", "The three parts of a for loop: initialization (let i = 0), condition (i < 5), and increment (i++)"),
+			textBlock("Let's break this down:\n" +
 				"1. **let i = 0** - Start with i equal to 0 (initialization)\n" +
 				"2. **i < 5** - Keep going while i is less than 5 (condition)\n" +
 				"3. **i++** - Add 1 to i after each loop (increment)\n" +
