@@ -28,89 +28,90 @@ You don't need to know HOW the toaster works - you just use it!`),
 			textBlock(`## Creating a Function
 
 Here's the basic structure:`),
-			codeBlock("javascript", `function functionName(parameters) {
-    // Code to run
-    return value;  // Optional
-}`),
+			codeBlock("csharp", `// ReturnType FunctionName(Parameters)
+// {
+//     // Code to run
+//     return value;  // Optional
+// }`),
 			textBlock(`### Simple Example: Say Hello`),
-			codeBlock("javascript", `function sayHello() {
-    console.log("Hello there!");
+			codeBlock("csharp", `void SayHello() {
+    Console.WriteLine("Hello there!");
 }
 
 // Using (calling) the function
-sayHello();  // Prints: Hello there!
-sayHello();  // Prints: Hello there!`),
+SayHello();  // Prints: Hello there!
+SayHello();  // Prints: Hello there!`),
 			textBlock(`We defined the function once, then used it twice!`),
 			textBlock(`## Functions with Parameters
 
 Parameters let you pass information INTO the function.`),
-			codeBlock("javascript", `function greet(name) {
-    console.log("Hello, " + name + "!");
+			codeBlock("csharp", `void Greet(string name) {
+    Console.WriteLine("Hello, " + name + "!");
 }
 
-greet("Alice");   // Hello, Alice!
-greet("Bob");     // Hello, Bob!
-greet("Charlie"); // Hello, Charlie!`),
+Greet("Alice");   // Hello, Alice!
+Greet("Bob");     // Hello, Bob!
+Greet("Charlie"); // Hello, Charlie!`),
 			textBlock(`You can have multiple parameters:`),
-			codeBlock("javascript", `function add(a, b) {
-    console.log(a + b);
+			codeBlock("csharp", `void Add(int a, int b) {
+    Console.WriteLine(a + b);
 }
 
-add(3, 5);   // 8
-add(10, 20); // 30`),
+Add(3, 5);   // 8
+Add(10, 20); // 30`),
 			textBlock(`## Functions that Return Values
 
 Sometimes you want the function to give you something back. Use the **return** keyword.`),
-			codeBlock("javascript", `function multiply(a, b) {
+			codeBlock("csharp", `int Multiply(int a, int b) {
     return a * b;
 }
 
-let result = multiply(4, 5);
-console.log(result);  // 20
+int result = Multiply(4, 5);
+Console.WriteLine(result);  // 20
 
 // You can use it directly too
-console.log(multiply(3, 7));  // 21`),
+Console.WriteLine(Multiply(3, 7));  // 21`),
 			textBlock(`**Important:** Once a function hits 'return', it stops immediately and gives back the value.`),
-			codeBlock("javascript", `function checkAge(age) {
+			codeBlock("csharp", `string CheckAge(int age) {
     if (age >= 18) {
         return "Adult";
     }
     return "Minor";  // This only runs if age < 18
 }
 
-console.log(checkAge(20));  // Adult
-console.log(checkAge(15));  // Minor`),
+Console.WriteLine(CheckAge(20));  // Adult
+Console.WriteLine(CheckAge(15));  // Minor`),
 			calloutBlock("tip", "Functions should do ONE thing well. If your function is doing many different things, break it into smaller functions!"),
 			textBlock(`## Putting It Together: A Real Example
 
 Let's calculate the area of a rectangle, but make it reusable:`),
-			codeBlock("javascript", `function calculateArea(width, height) {
+			codeBlock("csharp", `int CalculateArea(int width, int height) {
     return width * height;
 }
 
-function calculatePerimeter(width, height) {
+int CalculatePerimeter(int width, int height) {
     return 2 * (width + height);
 }
 
 // Using our functions
-let roomWidth = 10;
-let roomHeight = 8;
+int roomWidth = 10;
+int roomHeight = 8;
 
-let area = calculateArea(roomWidth, roomHeight);
-let perimeter = calculatePerimeter(roomWidth, roomHeight);
+int area = CalculateArea(roomWidth, roomHeight);
+int perimeter = CalculatePerimeter(roomWidth, roomHeight);
 
-console.log("Room area: " + area + " square feet");
-console.log("Room perimeter: " + perimeter + " feet");`),
+Console.WriteLine("Room area: " + area + " square feet");
+Console.WriteLine("Room perimeter: " + perimeter + " feet");`),
 			textBlock(`Now we can calculate area and perimeter for ANY rectangle without rewriting the math!`),
 			exerciseBlock(
-				"Write a function called 'isEven' that takes a number and returns true if it's even, false if it's odd. Then test it with the numbers 4, 7, and 10.",
-				`function isEven(number) {
-    return number % 2 === 0;
+				"Write a function called 'IsEven' that takes a number and returns true if it's even, false if it's odd. Then test it with the numbers 4, 7, and 10.",
+				`bool IsEven(int number) {
+    return number % 2 == 0;
 }
 
-console.log(isEven(4));   // true
-console.log(isEven(7));   // false
-console.log(isEven(10));  // true`,
+Console.WriteLine(IsEven(4));   // true
+Console.WriteLine(IsEven(7));   // false
+Console.WriteLine(IsEven(10));  // true`,
 				[]string{"Use the % operator (gives remainder)", "If number % 2 equals 0, it's even", "Return true or false"},
 			),
 		},

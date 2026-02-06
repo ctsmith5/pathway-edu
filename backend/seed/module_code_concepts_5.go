@@ -16,134 +16,131 @@ Here are the most common mistakes beginners make, and how to avoid them.`),
 			textBlock(`## Mistake #1: Off-by-One Errors
 
 This is the most common bug in programming. Arrays start at 0, not 1!`),
-			codeBlock("javascript", `let colors = ["red", "green", "blue"];
+			codeBlock("csharp", `string[] colors = { "red", "green", "blue" };
 
-// WRONG - This will give you undefined!
-console.log(colors[3]);  // undefined (there is no 4th item)
+// WRONG - This will give you an error!
+Console.WriteLine(colors[3]);  // IndexOutOfRangeException (there is no 4th item)
 
 // CORRECT - The last item is at position 2
-console.log(colors[2]);  // "blue"
+Console.WriteLine(colors[2]);  // "blue"
 
-// Better yet, use length - 1
-let lastIndex = colors.length - 1;
-console.log(colors[lastIndex]);  // "blue"`),
-			textBlock(`**How to avoid it:** Always remember: first item is [0], last item is [length - 1]`),
-			textBlock(`## Mistake #2: Using = Instead of == or ===
+// Better yet, use Length - 1
+int lastIndex = colors.Length - 1;
+Console.WriteLine(colors[lastIndex]);  // "blue"`),
+			textBlock(`**How to avoid it:** Always remember: first item is [0], last item is [Length - 1]`),
+			textBlock(`## Mistake #2: Using = Instead of ==
 
 - A single equals (=) assigns a value
-- Double equals (==) compares values (allows type conversion)
-- Triple equals (===) compares values AND types strictly`),
-			codeBlock("javascript", `let x = 5;
+- Double equals (==) compares values`),
+			codeBlock("csharp", `int x = 5;
 
-// WRONG - This assigns 10 to x, then checks if 10 is truthy
-if (x = 10) {
-    console.log("This always runs!");
+// WRONG - This assigns 10 to x, then checks if 10 is true
+if (x = 10) {  // This won't compile in C#!
+    Console.WriteLine("This always runs!");
 }
 
-// CORRECT - Use == or === to compare
+// CORRECT - Use == to compare
 if (x == 10) {
-    console.log("x equals 10");
+    Console.WriteLine("x equals 10");
 } else {
-    console.log("x is not 10");  // This runs
-}
-
-// STRICT COMPARISON - Checks value AND type
-console.log(5 == "5");   // true (converts string to number)
-console.log(5 === "5");  // false (different types!)`),
-			textBlock(`**How to avoid it:** Read your conditions out loud. "If x equals 10" should use == or ===. When in doubt, use === for strict comparison.`),
+    Console.WriteLine("x is not 10");  // This runs
+}`),
+			textBlock(`**How to avoid it:** Read your conditions out loud. "If x equals 10" should use ==. In C#, the compiler catches this error, unlike JavaScript!`),
 			textBlock(`## Mistake #3: Infinite Loops
 
 Forgetting to update your loop variable causes the loop to run forever!`),
-			codeBlock("javascript", `// WRONG - i never changes, so this runs forever!
-for (let i = 0; i < 5; i) {
-    console.log(i);
+			codeBlock("csharp", `// WRONG - i never changes, so this runs forever!
+for (int i = 0; i < 5; i) {
+    Console.WriteLine(i);
 }
 
 // WRONG - Same problem with while loops
-let count = 0;
+int count = 0;
 while (count < 5) {
-    console.log(count);
+    Console.WriteLine(count);
     // Oops! Forgot to increment count
 }
 
 // CORRECT
-for (let i = 0; i < 5; i++) {
-    console.log(i);
+for (int i = 0; i < 5; i++) {
+    Console.WriteLine(i);
 }`),
 			textBlock(`**How to avoid it:** Always check that your loop variable will eventually make the condition false.`),
 			textBlock(`## Mistake #4: Scope Issues
 
 Variables created inside a function (or loop) can't be used outside of it.`),
-			codeBlock("javascript", `function calculate() {
-    let result = 42;
+			codeBlock("csharp", `int Calculate() {
+    int result = 42;
     return result;
 }
 
-calculate();
-console.log(result);  // ERROR! result is not defined here
+Calculate();
+Console.WriteLine(result);  // ERROR! result is not defined here
 
 // CORRECT - Capture the return value
-let answer = calculate();
-console.log(answer);  // 42`),
+int answer = Calculate();
+Console.WriteLine(answer);  // 42`),
 			textBlock(`**How to avoid it:** Remember where you create your variables. If you need a value outside a function, return it and store it in a variable.`),
 			textBlock(`## Mistake #5: String vs Number Confusion
 
-JavaScript can be tricky with numbers that look like strings.`),
-			codeBlock("javascript", `let a = "5";
-let b = "3";
+C# is stricter than JavaScript, but you can still make this mistake:`),
+			codeBlock("csharp", `string a = "5";
+string b = "3";
 
 // WRONG - This concatenates (joins) strings!
-console.log(a + b);  // "53" (not 8!)
+Console.WriteLine(a + b);  // "53" (not 8!)
 
-// CORRECT - Convert to numbers first
-console.log(Number(a) + Number(b));  // 8
+// CORRECT - Parse to numbers first
+int numA = int.Parse(a);
+int numB = int.Parse(b);
+Console.WriteLine(numA + numB);  // 8
 
 // Or make sure they're numbers from the start
-let c = 5;
-let d = 3;
-console.log(c + d);  // 8`),
-			textBlock(`**How to avoid it:** Be careful with user input - it's usually a string even if it looks like a number. Use Number() to convert.`),
-			calloutBlock("tip", "When something isn't working, use console.log() to print out your variables at different points. This helps you see exactly what's happening!"),
+int c = 5;
+int d = 3;
+Console.WriteLine(c + d);  // 8`),
+			textBlock(`**How to avoid it:** Be careful with user input - it's usually a string. Use int.Parse(), double.Parse(), etc. to convert.`),
+			calloutBlock("tip", "When something isn't working, use Console.WriteLine() to print out your variables at different points. This helps you see exactly what's happening!"),
 			textBlock(`## Debugging Strategy: The Console is Your Friend
 
 When your code isn't working:
 
 1. **Read the error message carefully** - It usually tells you exactly what's wrong
-2. **Add console.log() statements** - Print your variables to see their values
+2. **Add Console.WriteLine() statements** - Print your variables to see their values
 3. **Check one thing at a time** - Don't change 5 things at once
 4. **Take a break** - Sometimes walking away helps you see the problem
 5. **Explain it out loud** - Seriously! Explain your code to a rubber duck (or a friend). Hearing it out loud helps you spot errors.
 
-### Example: Debugging with console.log`),
-			codeBlock("javascript", `function calculateTotal(price, quantity) {
-    console.log("Price:", price);      // Check what price is
-    console.log("Quantity:", quantity); // Check what quantity is
+### Example: Debugging with Console.WriteLine`),
+			codeBlock("csharp", `int CalculateTotal(string price, int quantity) {
+    Console.WriteLine("Price: " + price);      // Check what price is
+    Console.WriteLine("Quantity: " + quantity); // Check what quantity is
     
-    let total = price * quantity;
-    console.log("Total:", total);       // Check the result
+    int priceNum = int.Parse(price);
+    int total = priceNum * quantity;
+    Console.WriteLine("Total: " + total);       // Check the result
     
     return total;
 }
 
-calculateTotal("10", 5);  // Oops! Price is a string!`),
+CalculateTotal("10", 5);  // Works because we parse the string!`),
 			exerciseBlock(
 				"Find and fix the bug in this code:\n\n"+
-				"```javascript\n"+
-				"function sumArray(numbers) {\n"+
-				"    let sum = 0;\n"+
-				"    for (let i = 0; i <= numbers.length; i++) {\n"+
+				"```csharp\n"+
+				"int SumArray(int[] numbers) {\n"+
+				"    int sum = 0;\n"+
+				"    for (int i = 0; i <= numbers.Length; i++) {\n"+
 				"        sum += numbers[i];\n"+
 				"    }\n"+
 				"    return sum;\n"+
 				"}\n\n"+
-				"console.log(sumArray([1, 2, 3]));  // Should be 6, but gets undefined\n"+
+				"Console.WriteLine(SumArray(new int[] {1, 2, 3}));  // Should be 6, but throws error\n"+
 				"```",
-				"The bug is in the loop condition: i <= numbers.length should be i < numbers.length.\n\n"+
-				"When i equals numbers.length (which is 3), numbers[3] is undefined.\n"+
-				"undefined + number = NaN (Not a Number).\n\n"+
+				"The bug is in the loop condition: i <= numbers.Length should be i < numbers.Length.\n\n"+
+				"When i equals numbers.Length (which is 3), numbers[3] throws IndexOutOfRangeException.\n\n"+
 				"Fixed version:\n"+
-				"for (let i = 0; i < numbers.length; i++) {",
-				[]string{"Check the loop condition carefully", "What happens when i equals the array length?", "Remember: last valid index is length - 1"},
+				"for (int i = 0; i < numbers.Length; i++) {",
+				[]string{"Check the loop condition carefully", "What happens when i equals the array length?", "Remember: last valid index is Length - 1"},
 			),
 		},
 	}
