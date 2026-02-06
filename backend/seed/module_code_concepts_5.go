@@ -15,9 +15,8 @@ Here are the most common mistakes beginners make, and how to avoid them.`),
 			calloutBlock("info", "Mistakes are how you learn! Don't get discouraged. Every bug you fix makes you a better programmer."),
 			textBlock(`## Mistake #1: Off-by-One Errors
 
-This is the most common bug in programming. Arrays start at 0, not 1!
-
-` + "```javascript\n" + `let colors = ["red", "green", "blue"];
+This is the most common bug in programming. Arrays start at 0, not 1!`),
+			codeBlock("javascript", `let colors = ["red", "green", "blue"];
 
 // WRONG - This will give you undefined!
 console.log(colors[3]);  // undefined (there is no 4th item)
@@ -27,16 +26,14 @@ console.log(colors[2]);  // "blue"
 
 // Better yet, use length - 1
 let lastIndex = colors.length - 1;
-console.log(colors[lastIndex]);  // "blue"
-` + "```" + `
-**How to avoid it:** Always remember: first item is [0], last item is [length - 1]`),
+console.log(colors[lastIndex]);  // "blue"`),
+			textBlock(`**How to avoid it:** Always remember: first item is [0], last item is [length - 1]`),
 			textBlock(`## Mistake #2: Using = Instead of == or ===
 
 - A single equals (=) assigns a value
 - Double equals (==) compares values (allows type conversion)
-- Triple equals (===) compares values AND types strictly
-
-` + "```javascript\n" + `let x = 5;
+- Triple equals (===) compares values AND types strictly`),
+			codeBlock("javascript", `let x = 5;
 
 // WRONG - This assigns 10 to x, then checks if 10 is truthy
 if (x = 10) {
@@ -52,14 +49,12 @@ if (x == 10) {
 
 // STRICT COMPARISON - Checks value AND type
 console.log(5 == "5");   // true (converts string to number)
-console.log(5 === "5");  // false (different types!)
-` + "```" + `
-**How to avoid it:** Read your conditions out loud. \"If x equals 10\" should use == or ===. When in doubt, use === for strict comparison.`),
+console.log(5 === "5");  // false (different types!)`),
+			textBlock(`**How to avoid it:** Read your conditions out loud. "If x equals 10" should use == or ===. When in doubt, use === for strict comparison.`),
 			textBlock(`## Mistake #3: Infinite Loops
 
-Forgetting to update your loop variable causes the loop to run forever!
-
-` + "```javascript\n" + `// WRONG - i never changes, so this runs forever!
+Forgetting to update your loop variable causes the loop to run forever!`),
+			codeBlock("javascript", `// WRONG - i never changes, so this runs forever!
 for (let i = 0; i < 5; i) {
     console.log(i);
 }
@@ -74,14 +69,12 @@ while (count < 5) {
 // CORRECT
 for (let i = 0; i < 5; i++) {
     console.log(i);
-}
-` + "```" + `
-**How to avoid it:** Always check that your loop variable will eventually make the condition false.`),
+}`),
+			textBlock(`**How to avoid it:** Always check that your loop variable will eventually make the condition false.`),
 			textBlock(`## Mistake #4: Scope Issues
 
-Variables created inside a function (or loop) can't be used outside of it.
-
-` + "```javascript\n" + `function calculate() {
+Variables created inside a function (or loop) can't be used outside of it.`),
+			codeBlock("javascript", `function calculate() {
     let result = 42;
     return result;
 }
@@ -91,14 +84,12 @@ console.log(result);  // ERROR! result is not defined here
 
 // CORRECT - Capture the return value
 let answer = calculate();
-console.log(answer);  // 42
-` + "```" + `
-**How to avoid it:** Remember where you create your variables. If you need a value outside a function, return it and store it in a variable.`),
+console.log(answer);  // 42`),
+			textBlock(`**How to avoid it:** Remember where you create your variables. If you need a value outside a function, return it and store it in a variable.`),
 			textBlock(`## Mistake #5: String vs Number Confusion
 
-JavaScript can be tricky with numbers that look like strings.
-
-` + "```javascript\n" + `let a = "5";
+JavaScript can be tricky with numbers that look like strings.`),
+			codeBlock("javascript", `let a = "5";
 let b = "3";
 
 // WRONG - This concatenates (joins) strings!
@@ -110,9 +101,8 @@ console.log(Number(a) + Number(b));  // 8
 // Or make sure they're numbers from the start
 let c = 5;
 let d = 3;
-console.log(c + d);  // 8
-` + "```" + `
-**How to avoid it:** Be careful with user input - it's usually a string even if it looks like a number. Use Number() to convert.`),
+console.log(c + d);  // 8`),
+			textBlock(`**How to avoid it:** Be careful with user input - it's usually a string even if it looks like a number. Use Number() to convert.`),
 			calloutBlock("tip", "When something isn't working, use console.log() to print out your variables at different points. This helps you see exactly what's happening!"),
 			textBlock(`## Debugging Strategy: The Console is Your Friend
 
@@ -124,9 +114,8 @@ When your code isn't working:
 4. **Take a break** - Sometimes walking away helps you see the problem
 5. **Explain it out loud** - Seriously! Explain your code to a rubber duck (or a friend). Hearing it out loud helps you spot errors.
 
-### Example: Debugging with console.log
-
-` + "```javascript\n" + `function calculateTotal(price, quantity) {
+### Example: Debugging with console.log`),
+			codeBlock("javascript", `function calculateTotal(price, quantity) {
     console.log("Price:", price);      // Check what price is
     console.log("Quantity:", quantity); // Check what quantity is
     
@@ -136,8 +125,7 @@ When your code isn't working:
     return total;
 }
 
-calculateTotal("10", 5);  // Oops! Price is a string!
-` + "```"),
+calculateTotal("10", 5);  // Oops! Price is a string!`),
 			exerciseBlock(
 				"Find and fix the bug in this code:\n\n"+
 				"```javascript\n"+

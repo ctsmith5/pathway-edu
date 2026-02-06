@@ -27,53 +27,41 @@ A function is like a toaster:
 You don't need to know HOW the toaster works - you just use it!`),
 			textBlock(`## Creating a Function
 
-Here's the basic structure:
-
-` + "```javascript\n" + `function functionName(parameters) {
+Here's the basic structure:`),
+			codeBlock("javascript", `function functionName(parameters) {
     // Code to run
     return value;  // Optional
-}
-` + "```" + `
-
-### Simple Example: Say Hello
-
-` + "```javascript\n" + `function sayHello() {
+}`),
+			textBlock(`### Simple Example: Say Hello`),
+			codeBlock("javascript", `function sayHello() {
     console.log("Hello there!");
 }
 
 // Using (calling) the function
 sayHello();  // Prints: Hello there!
-sayHello();  // Prints: Hello there!
-` + "```" + `
-
-We defined the function once, then used it twice!`),
+sayHello();  // Prints: Hello there!`),
+			textBlock(`We defined the function once, then used it twice!`),
 			textBlock(`## Functions with Parameters
 
-Parameters let you pass information INTO the function.
-
-` + "```javascript\n" + `function greet(name) {
+Parameters let you pass information INTO the function.`),
+			codeBlock("javascript", `function greet(name) {
     console.log("Hello, " + name + "!");
 }
 
 greet("Alice");   // Hello, Alice!
 greet("Bob");     // Hello, Bob!
-greet("Charlie"); // Hello, Charlie!
-` + "```" + `
-
-You can have multiple parameters:
-
-` + "```javascript\n" + `function add(a, b) {
+greet("Charlie"); // Hello, Charlie!`),
+			textBlock(`You can have multiple parameters:`),
+			codeBlock("javascript", `function add(a, b) {
     console.log(a + b);
 }
 
 add(3, 5);   // 8
-add(10, 20); // 30
-` + "```"),
+add(10, 20); // 30`),
 			textBlock(`## Functions that Return Values
 
-Sometimes you want the function to give you something back. Use the **return** keyword.
-
-` + "```javascript\n" + `function multiply(a, b) {
+Sometimes you want the function to give you something back. Use the **return** keyword.`),
+			codeBlock("javascript", `function multiply(a, b) {
     return a * b;
 }
 
@@ -81,12 +69,9 @@ let result = multiply(4, 5);
 console.log(result);  // 20
 
 // You can use it directly too
-console.log(multiply(3, 7));  // 21
-` + "```" + `
-
-**Important:** Once a function hits 'return', it stops immediately and gives back the value.
-
-` + "```javascript\n" + `function checkAge(age) {
+console.log(multiply(3, 7));  // 21`),
+			textBlock(`**Important:** Once a function hits 'return', it stops immediately and gives back the value.`),
+			codeBlock("javascript", `function checkAge(age) {
     if (age >= 18) {
         return "Adult";
     }
@@ -94,14 +79,12 @@ console.log(multiply(3, 7));  // 21
 }
 
 console.log(checkAge(20));  // Adult
-console.log(checkAge(15));  // Minor
-` + "```"),
+console.log(checkAge(15));  // Minor`),
 			calloutBlock("tip", "Functions should do ONE thing well. If your function is doing many different things, break it into smaller functions!"),
 			textBlock(`## Putting It Together: A Real Example
 
-Let's calculate the area of a rectangle, but make it reusable:
-
-` + "```javascript\n" + `function calculateArea(width, height) {
+Let's calculate the area of a rectangle, but make it reusable:`),
+			codeBlock("javascript", `function calculateArea(width, height) {
     return width * height;
 }
 
@@ -117,10 +100,8 @@ let area = calculateArea(roomWidth, roomHeight);
 let perimeter = calculatePerimeter(roomWidth, roomHeight);
 
 console.log("Room area: " + area + " square feet");
-console.log("Room perimeter: " + perimeter + " feet");
-` + "```" + `
-
-Now we can calculate area and perimeter for ANY rectangle without rewriting the math!`),
+console.log("Room perimeter: " + perimeter + " feet");`),
+			textBlock(`Now we can calculate area and perimeter for ANY rectangle without rewriting the math!`),
 			exerciseBlock(
 				"Write a function called 'isEven' that takes a number and returns true if it's even, false if it's odd. Then test it with the numbers 4, 7, and 10.",
 				`function isEven(number) {

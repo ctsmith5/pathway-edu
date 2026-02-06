@@ -45,47 +45,36 @@ console.log(myAge);      // Prints: 17`),
 Computers need to know what kind of data they're working with. Here are the most common types:
 
 ### 1. Strings (Text)
-Strings are text - anything in quotes. Think of it like a message in a bottle.
-
-` + "```javascript\n" + `// Strings are always in quotes
+Strings are text - anything in quotes. Think of it like a message in a bottle.`),
+			codeBlock("javascript", `// Strings are always in quotes
 let firstName = "Maria";
 let favoriteFood = 'Pizza';
 let message = "Hello, World!";
 
 // You can combine strings
-let greeting = "Hi, " + firstName;  // "Hi, Maria"
-` + "```" + `
-
-### 2. Numbers
-Numbers can be whole numbers (integers) or decimals (floating point).
-
-` + "```javascript\n" + `let age = 16;           // Integer (whole number)
+let greeting = "Hi, " + firstName;  // "Hi, Maria"`),
+			textBlock(`### 2. Numbers
+Numbers can be whole numbers (integers) or decimals (floating point).`),
+			codeBlock("javascript", `let age = 16;           // Integer (whole number)
 let price = 19.99;      // Float (decimal)
 let temperature = -5;   // Negative numbers work too
 
 // Math operations
 let sum = 10 + 5;       // 15
-let product = 4 * 3;    // 12
-` + "```" + `
-
-### 3. Booleans (True/False)
-Booleans are simple: they're either true or false. Like a light switch - it's either on or off.
-
-` + "```javascript\n" + `let isLoggedIn = true;
+let product = 4 * 3;    // 12`),
+			textBlock(`### 3. Booleans (True/False)
+Booleans are simple: they're either true or false. Like a light switch - it's either on or off.`),
+			codeBlock("javascript", `let isLoggedIn = true;
 let hasPermission = false;
-let isRaining = true;
-` + "```" + `
-
-### 4. Arrays (Lists)
-An array is a list of items. Think of it like a shopping list or a row of lockers.
-
-` + "```javascript\n" + `let colors = ["red", "green", "blue"];
+let isRaining = true;`),
+			textBlock(`### 4. Arrays (Lists)
+An array is a list of items. Think of it like a shopping list or a row of lockers.`),
+			codeBlock("javascript", `let colors = ["red", "green", "blue"];
 let scores = [95, 87, 92, 88];
 
 // Access items by position (starts at 0!)
 console.log(colors[0]);  // "red"
-console.log(colors[2]);  // "blue"
-` + "```"),
+console.log(colors[2]);  // "blue"`),
 			calloutBlock("warning", "Arrays start counting at 0, not 1! The first item is at position 0, the second at position 1, etc. This is a common source of bugs for beginners."),
 			exerciseBlock(
 				"Create variables to store your name, age, and whether you like pizza (true/false). Then create an array of your three favorite movies. Print them all to the console.",
