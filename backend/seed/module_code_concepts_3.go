@@ -34,7 +34,7 @@ print("Hello!")
 				"python": `for i in range(5):
     print("Iteration:", i)`,
 			}),
-			imageBlock("https://storage.googleapis.com/ludicrousapps-c1ea7.firebasestorage.app/PathwayEdu/c0bce1f6-1423-44da-8e94-53da0aa5a3a5.png", "Simple educational infographic showing a for loop with cartoon robot taking 5 steps", "For loop anatomy: The Start (i=0), The Condition (i<5), The Step (i++), represented by a robot taking steps"),
+			imageBlock("https://storage.googleapis.com/ludicrousapps-c1ea7.firebasestorage.app/PathwayEdu/b0aca6cb-3c5c-4b30-837b-72dbc70a84a8.png", "Simple educational infographic showing a for loop with cartoon robot taking 5 steps", "For loop anatomy: The Start (i=0), The Condition (i<5), The Step (i++), represented by a robot taking steps"),
 			textBlock("Let's break this down:\n" +
 				"1. **Initialization** - Start with a counter variable\n" +
 				"2. **Condition** - Keep going while this is true\n" +
