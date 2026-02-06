@@ -4,8 +4,8 @@ import "github.com/pathway/backend/models"
 
 func courseCodeConcepts() models.Course {
 	return models.Course{
-		Title:       "Code Concepts",
-		Description: "Fundamental programming paradigms and concepts that every developer should master.",
+		Title:       "Coding Foundations",
+		Description: "Your first steps into programming! Learn the building blocks that every programmer uses, explained in plain English with lots of examples.",
 		Modules: []models.Module{
 			moduleCodeConcepts1(),
 			moduleCodeConcepts2(),
@@ -13,10 +13,6 @@ func courseCodeConcepts() models.Course {
 			moduleCodeConcepts4(),
 			moduleCodeConcepts5(),
 			moduleCodeConcepts6(),
-			moduleTypeScriptStarter(),
-			moduleReactHelloWorld(),
-			moduleFizzBuzzClass(),
-			moduleFizzBuzzGaltonUI(),
 		},
 	}
 }

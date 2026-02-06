@@ -1,0 +1,40 @@
+name: Deploy and Seed Production
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy-and-seed:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.21'
+
+      - name: Install Railway CLI
+        run: npm install -g @railway/cli
+
+      - name: Deploy to Railway Production
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_PROD_TOKEN }}
+        run: |
+          cd backend
+          railway link --project ${{ secrets.RAILWAY_PROD_PROJECT_ID }} --service ${{ secrets.RAILWAY_PROD_SERVICE_ID }}
+          railway up
+
+      - name: Seed Production Database
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_PROD_TOKEN }}
+        run: |
+          cd backend
+          railway run go run cmd/seed/main.go
+
+      - name: Notify Success
+        if: success()
+        run: echo "✅ Production deployed and seeded successfully!"

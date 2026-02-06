@@ -1,6 +1,7 @@
 import React from 'react';
 import TextBlock from './TextBlock';
 import CodeBlock from './CodeBlock';
+import MultiCodeBlock from './MultiCodeBlock';
 import ImageBlock from './ImageBlock';
 import CalloutBlock from './CalloutBlock';
 import ExerciseBlock from './ExerciseBlock';
@@ -10,6 +11,7 @@ import './content.css';
 const blockComponents = {
   text: TextBlock,
   code: CodeBlock,
+  multiCode: MultiCodeBlock,
   image: ImageBlock,
   callout: CalloutBlock,
   exercise: ExerciseBlock,

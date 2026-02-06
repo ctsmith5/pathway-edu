@@ -28,6 +28,16 @@ func codeBlock(language, code string) models.ContentBlock {
 	}
 }
 
+// Helper function to create a multi-language code block
+func multiCodeBlock(codes map[string]string) models.ContentBlock {
+	return models.ContentBlock{
+		Type: "multiCode",
+		Data: map[string]interface{}{
+			"codes": codes,
+		},
+	}
+}
+
 // Helper function to create an image block
 func imageBlock(url, alt, caption string) models.ContentBlock {
 	return models.ContentBlock{

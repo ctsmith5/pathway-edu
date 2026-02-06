@@ -66,33 +66,33 @@ export const chapters = [
     items: [
       {
         courseTitle: 'Code Concepts',
-        moduleId: 'code-5',
-        title: 'Programming Languages 101',
-        description: 'Understand how languages like C#, JavaScript, and TypeScript compare'
-      },
-      {
-        courseTitle: 'Code Concepts',
         moduleId: 'code-1',
-        title: 'Object-Oriented Programming',
-        description: 'Learn what classes and objects are and why they matter'
+        title: 'What is Code?',
+        description: 'Learn the fundamentals of what code is and how it works'
       },
       {
         courseTitle: 'Code Concepts',
-        moduleId: 'code-6',
-        title: 'Control Flow',
-        description: 'Learn how programs make decisions and repeat work'
+        moduleId: 'code-2',
+        title: 'Making Decisions',
+        description: 'Learn how programs make decisions with if/else and switch statements'
       },
       {
         courseTitle: 'Code Concepts',
-        moduleId: 'fizzbuzz-class',
-        title: 'FizzBuzz Engine (TypeScript Class)',
-        description: 'Build a TypeScript class that solves FizzBuzz'
+        moduleId: 'code-3',
+        title: 'Repeating Actions',
+        description: 'Learn how to repeat code with for loops and while loops'
       },
       {
         courseTitle: 'Code Concepts',
-        moduleId: 'fizzbuzz-galton-ui',
-        title: 'FizzBuzz Galton Board UI',
-        description: 'Build a small React animation that visualizes FizzBuzz results'
+        moduleId: 'code-4',
+        title: 'Organizing Code with Functions',
+        description: 'Learn how to write reusable functions to organize your code'
+      },
+      {
+        courseTitle: 'Code Concepts',
+        moduleId: 'code-5',
+        title: 'Common Mistakes Beginners Make',
+        description: 'Learn about common pitfalls and how to avoid them'
       }
     ]
   },
